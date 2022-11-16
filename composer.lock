@@ -4,8 +4,146 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38df77e53f4c78f3a21a8ec11d0d0a7a",
+    "content-hash": "795b75d31b60b89b9365fcabc7c18ac3",
     "packages": [
+        {
+            "name": "arcanedev/log-viewer",
+            "version": "9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ARCANEDEV/LogViewer.git",
+                "reference": "ba0c14ef65c93fae6745ff0607a14d83d39e3faa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ARCANEDEV/LogViewer/zipball/ba0c14ef65c93fae6745ff0607a14d83d39e3faa",
+                "reference": "ba0c14ef65c93fae6745ff0607a14d83d39e3faa",
+                "shasum": ""
+            },
+            "require": {
+                "arcanedev/support": "^9.0",
+                "ext-json": "*",
+                "php": "^8.0",
+                "psr/log": "^1.0|^2.0|^3.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^9.0",
+                "mockery/mockery": "^1.4.4",
+                "orchestra/testbench-core": "^7.0",
+                "phpunit/phpunit": "^9.5.10"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "10.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Arcanedev\\LogViewer\\LogViewerServiceProvider",
+                        "Arcanedev\\LogViewer\\Providers\\DeferredServicesProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Arcanedev\\LogViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ARCANEDEV",
+                    "email": "arcanedev.maroc@gmail.com",
+                    "homepage": "https://github.com/arcanedev-maroc",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides a Log Viewer for Laravel",
+            "homepage": "https://github.com/ARCANEDEV/LogViewer",
+            "keywords": [
+                "arcanedev",
+                "arcanesoft",
+                "laravel",
+                "log",
+                "log viewer",
+                "log-viewer",
+                "logviewer"
+            ],
+            "support": {
+                "issues": "https://github.com/ARCANEDEV/LogViewer/issues",
+                "source": "https://github.com/ARCANEDEV/LogViewer/tree/9.0.0"
+            },
+            "time": "2022-02-10T21:20:19+00:00"
+        },
+        {
+            "name": "arcanedev/support",
+            "version": "9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ARCANEDEV/Support.git",
+                "reference": "046d87b2d638cd0687b4ba06991947df2422970d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ARCANEDEV/Support/zipball/046d87b2d638cd0687b4ba06991947df2422970d",
+                "reference": "046d87b2d638cd0687b4ba06991947df2422970d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0",
+                "illuminate/support": "^9.0",
+                "php": "^8.0.2"
+            },
+            "require-dev": {
+                "laravel/framework": "^9.0",
+                "orchestra/testbench-core": "^7.0",
+                "phpunit/phpunit": "^9.5.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "10.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Arcanedev\\Support\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ARCANEDEV",
+                    "email": "arcanedev.maroc@gmail.com",
+                    "homepage": "https://github.com/arcanedev-maroc"
+                }
+            ],
+            "description": "ARCANEDEV Support Helpers",
+            "homepage": "https://github.com/ARCANEDEV/Support",
+            "keywords": [
+                "arcanedev",
+                "arcanesoft",
+                "laravel",
+                "support"
+            ],
+            "support": {
+                "issues": "https://github.com/ARCANEDEV/Support/issues",
+                "source": "https://github.com/ARCANEDEV/Support/tree/9.0.0"
+            },
+            "time": "2022-02-10T19:52:50+00:00"
+        },
         {
             "name": "bacon/bacon-qr-code",
             "version": "2.0.7",
@@ -1132,6 +1270,68 @@
                 }
             ],
             "time": "2020-06-13T08:05:20+00:00"
+        },
+        {
+            "name": "laravel-views/laravel-views",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gustavinho/laravel-views.git",
+                "reference": "299412c0ece5d08d0a11012d02a2c9fc04ffaaba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gustavinho/laravel-views/zipball/299412c0ece5d08d0a11012d02a2c9fc04ffaaba",
+                "reference": "299412c0ece5d08d0a11012d02a2c9fc04ffaaba",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "2.*"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.3",
+                "laravel/legacy-factories": "^1.1",
+                "nunomaduro/collision": "^5.3",
+                "nunomaduro/larastan": "^0.7.6",
+                "orchestra/testbench": "4.*|5.*|6.*",
+                "phpunit/phpunit": "7.0.*|8.5.*|9.5.*",
+                "spatie/laravel-ray": "^1.12"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelViews\\LaravelViewsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelViews": "LaravelViews\\Facades\\LaravelViews",
+                        "Variants": "LaravelViews\\Facades\\Variants",
+                        "UI": "LaravelViews\\Facades\\UI"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelViews\\": "src",
+                    "LaravelViews\\Test\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gustavo Martinez",
+                    "email": "gustavinho.martinez@gmail.com"
+                }
+            ],
+            "description": "Laravel package to create beautiful common views like tables using only PHP code",
+            "support": {
+                "issues": "https://github.com/Gustavinho/laravel-views/issues",
+                "source": "https://github.com/Gustavinho/laravel-views/tree/v2.4.0"
+            },
+            "time": "2021-09-29T22:39:10+00:00"
         },
         {
             "name": "laravel/fortify",
@@ -3450,6 +3650,88 @@
                 }
             ],
             "time": "2022-11-05T23:03:38+00:00"
+        },
+        {
+            "name": "spatie/laravel-permission",
+            "version": "5.5.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "e57a67b51a02cbfcd074ed68786897db1dbbf2fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/e57a67b51a02cbfcd074ed68786897db1dbbf2fa",
+                "reference": "e57a67b51a02cbfcd074ed68786897db1dbbf2fa",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^7.0|^8.0|^9.0",
+                "illuminate/container": "^7.0|^8.0|^9.0",
+                "illuminate/contracts": "^7.0|^8.0|^9.0",
+                "illuminate/database": "^7.0|^8.0|^9.0",
+                "php": "^7.3|^8.0|^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0|^7.0",
+                "phpunit/phpunit": "^9.4",
+                "predis/predis": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Permission\\PermissionServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-main": "5.x-dev",
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Spatie\\Permission\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Permission handling for Laravel 6.0 and up",
+            "homepage": "https://github.com/spatie/laravel-permission",
+            "keywords": [
+                "acl",
+                "laravel",
+                "permission",
+                "permissions",
+                "rbac",
+                "roles",
+                "security",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-permission/issues",
+                "source": "https://github.com/spatie/laravel-permission/tree/5.5.16"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-10-23T02:49:28+00:00"
         },
         {
             "name": "symfony/console",

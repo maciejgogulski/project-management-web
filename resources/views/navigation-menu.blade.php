@@ -15,6 +15,16 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    @can('log-viewer')
+                    <x-jet-nav-link href="{{ route('log-viewer::dashboard') }}" :active="request()->routeIs('log-viewer::dashboard')">
+                        {{ __('translation.navigation.log-viewer') }}
+                    </x-jet-nav-link>
+                    @endcan
+                    @can('users.index')
+                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                        {{ __('translation.navigation.users') }}
+                    </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 

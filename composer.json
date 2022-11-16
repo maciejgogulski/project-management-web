@@ -6,12 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "arcanedev/log-viewer": "^9.0",
         "guzzlehttp/guzzle": "^7.2",
+        "laravel-views/laravel-views": "^2.4",
         "laravel/framework": "^9.19",
         "laravel/jetstream": "^2.12",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "livewire/livewire": "^2.5"
+        "livewire/livewire": "^2.5",
+        "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

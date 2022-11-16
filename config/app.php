@@ -197,6 +197,12 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
+        //Permissions and roles
+        Spatie\Permission\PermissionServiceProvider::class,
+
+        //Log Viewer
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
+
     ],
 
     /*
