@@ -10,4 +10,6 @@ return [
         'log-viewer' => 'Logi',
         'users' => 'Użytkownicy',
     ],
+    'yes' => 'Tak',
+    'no' => 'Nie',
 ];

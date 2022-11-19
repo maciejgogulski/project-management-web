@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Users;
 
 use App\Http\Livewire\Current;
+use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
+use App\Http\Livewire\Users\Filters\UsersRoleFilter;
 use App\Models\User;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
@@ -50,6 +52,14 @@ class UsersTableView extends TableView
             $model->email,
             $model->roles->implode('name', ','),
             $model->created_at,
+        ];
+    }
+
+    protected function filters()
+    {
+        return [
+            new UsersRoleFilter,
+            new EmailVerifiedFilter,
         ];
     }
 }
