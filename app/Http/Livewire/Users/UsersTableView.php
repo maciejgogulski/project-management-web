@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Users;
 
 use App\Http\Livewire\Current;
+use App\Http\Livewire\Users\Actions\AssignAdminRoleAction;
+use App\Http\Livewire\Users\Actions\RemoveAdminRoleAction;
 use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
 use App\Http\Livewire\Users\Filters\UsersRoleFilter;
 use App\Models\User;
@@ -50,16 +52,24 @@ class UsersTableView extends TableView
         return [
             $model->name,
             $model->email,
-            $model->roles->implode('name', ','),
+            $model->roles->implode('name', ', '),
             $model->created_at,
         ];
     }
 
-    protected function filters()
+    protected function filters(): array
     {
         return [
             new UsersRoleFilter,
             new EmailVerifiedFilter,
+        ];
+    }
+
+    protected function actionsByRow(): array
+    {
+        return [
+            new AssignAdminRoleAction,
+            new RemoveAdminRoleAction
         ];
     }
 }
