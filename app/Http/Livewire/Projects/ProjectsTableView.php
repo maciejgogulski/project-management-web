@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire\Projects;
 
+use App\Http\Livewire\Projects\Actions\AddUserToProjectAction;
+use App\Http\Livewire\Projects\Actions\SoftDeleteProjectAction;
+use App\Http\Livewire\Users\Actions\AssignAdminRoleAction;
+use App\Http\Livewire\Users\Actions\RemoveAdminRoleAction;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Facades\Header;
@@ -58,6 +62,14 @@ class ProjectsTableView extends TableView
             $model->created_at,
             $model->updated_at,
             $model->deleted_at,
+        ];
+    }
+
+    protected function actionsByRow(): array
+    {
+        return [
+            new AddUserToProjectAction,
+            new SoftDeleteProjectAction,
         ];
     }
 }
