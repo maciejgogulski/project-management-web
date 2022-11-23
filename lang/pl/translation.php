@@ -9,6 +9,7 @@ return [
         'dashboard' => 'Dashboard',
         'log-viewer' => 'Logi',
         'users' => 'Użytkownicy',
+        'tasks' => 'Zadania',
     ],
     'yes' => 'Tak',
     'no' => 'Nie',
