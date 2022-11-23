@@ -16,14 +16,14 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     @can('tasks.manage')
-                        <x-jet-responsive-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('tasks.index')">
+                        <x-jet-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('tasks.index')">
                             {{ __('translation.navigation.tasks') }}
-                        </x-jet-responsive-nav-link>
+                        </x-jet-nav-link>
                     @endcan
                     @can('projects.manage')
-                    <x-jet-responsive-nav-link href="{{ route('projects.index') }}" :active="request()->routeIs('projects.index')">
+                    <x-jet-nav-link href="{{ route('projects.index') }}" :active="request()->routeIs('projects.index')">
                         {{ __('translation.navigation.projects') }}
-                    </x-jet-responsive-nav-link>
+                    </x-jet-nav-link>
                     @endcan
                     @can('log-viewer')
                     <x-jet-nav-link href="{{ route('log-viewer::dashboard') }}" :active="request()->routeIs('log-viewer::dashboard')">
@@ -160,13 +160,13 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('translation.navigation.dashboard') }}
             </x-jet-responsive-nav-link>
-            @can('tasks.index')
-                <x-jet-responsive-nav-link href="{{ route('tasks.manage') }}" :active="request()->routeIs('tasks.index')">
+            @can('tasks.manage')
+                <x-jet-responsive-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('tasks.index')">
                     {{ __('translation.navigation.tasks') }}
                 </x-jet-responsive-nav-link>
             @endcan
-            @can('tasks.index')
-            <x-jet-responsive-nav-link href="{{ route('projects.manage') }}" :active="request()->routeIs('projects.index')">
+            @can('projects.manage')
+            <x-jet-responsive-nav-link href="{{ route('projects.index') }}" :active="request()->routeIs('projects.index')">
                 {{ __('translation.navigation.projects') }}
             </x-jet-responsive-nav-link>
             @endcan
