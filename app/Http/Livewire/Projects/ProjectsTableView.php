@@ -1,22 +1,27 @@
 <?php
 
-namespace App\Http\Livewire\Tasks;
+namespace App\Http\Livewire\Projects;
 
-use App\Models\Task;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 
-class TasksTableView extends TableView
+
+class ProjectsTableView extends TableView
 {
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = Task::class;
+    protected $model = Project::class;
 
+    /**
+     * Sets the headers of the table as you want to be displayed
+     *
+     * @return array<string> Array of headers
+     */
     public $searchBy = [
         'name',
-        'deadline',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -24,9 +29,8 @@ class TasksTableView extends TableView
 
     public function repository():Builder
     {
-        return Task::query()->withTrashed();
+        return Project::query()->withTrashed();
     }
-
     /**
      * Sets the headers of the table as you want to be displayed
      *
@@ -35,8 +39,7 @@ class TasksTableView extends TableView
     public function headers(): array
     {
         return [
-            Header::title(__('tasks.attributes.name'))->sortBy('name'),
-            Header::title(__('tasks.attributes.deadline'))->sortBy('name'),
+            Header::title(__('projects.attributes.name'))->sortBy('name'),
             Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
             Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
@@ -52,7 +55,6 @@ class TasksTableView extends TableView
     {
         return [
             $model->name,
-            $model->deadline,
             $model->created_at,
             $model->updated_at,
             $model->deleted_at,
