@@ -3,7 +3,12 @@
 namespace App\Http\Livewire\Users;
 
 use App\Http\Livewire\Current;
+use App\Http\Livewire\Users\Actions\AssignAdminRoleAction;
+use App\Http\Livewire\Users\Actions\RemoveAdminRoleAction;
+use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
+use App\Http\Livewire\Users\Filters\UsersRoleFilter;
 use App\Models\User;
+use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 
 class UsersTableView extends TableView
@@ -13,6 +18,15 @@ class UsersTableView extends TableView
      */
     protected $model = User::class;
 
+    public $searchBy = [
+        'name',
+        'email',
+        'roles.name',
+        'created_at',
+    ];
+
+    protected $paginate = 5;
+
     /**
      * Sets the headers of the table as you want to be displayed
      *
@@ -21,10 +35,10 @@ class UsersTableView extends TableView
     public function headers(): array
     {
         return [
-            __('users.attributes.name'),
-            __('users.attributes.email'),
+            Header::title(__('users.attributes.name'))->sortBy('name'),
+            Header::title(__('users.attributes.email'))->sortBy('email'),
             __('users.attributes.roles'),
-            __('translation.attributes.created_at'),
+            Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
         ];
     }
 
@@ -38,8 +52,24 @@ class UsersTableView extends TableView
         return [
             $model->name,
             $model->email,
-            $model->roles->implode('name', ','),
+            $model->roles->implode('name', ', '),
             $model->created_at,
+        ];
+    }
+
+    protected function filters(): array
+    {
+        return [
+            new UsersRoleFilter,
+            new EmailVerifiedFilter,
+        ];
+    }
+
+    protected function actionsByRow(): array
+    {
+        return [
+            new AssignAdminRoleAction,
+            new RemoveAdminRoleAction
         ];
     }
 }
