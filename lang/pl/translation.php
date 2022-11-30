@@ -14,4 +14,9 @@ return [
     ],
     'yes' => 'Tak',
     'no' => 'Nie',
+    'edit' => 'Edytuj',
+    'delete' => 'Usuń',
+    'back' => 'Cofnij',
+    'save' => 'Zapisz'
+
 ];

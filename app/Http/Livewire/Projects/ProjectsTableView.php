@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Projects;
 
 use App\Http\Livewire\Projects\Actions\AddUserToProjectAction;
+use App\Http\Livewire\Projects\Actions\EditProjectAction;
 use App\Http\Livewire\Projects\Actions\SoftDeleteProjectAction;
 use App\Http\Livewire\Users\Actions\AssignAdminRoleAction;
 use App\Http\Livewire\Users\Actions\RemoveAdminRoleAction;
@@ -68,6 +69,7 @@ class ProjectsTableView extends TableView
     protected function actionsByRow(): array
     {
         return [
+            new EditProjectAction('projects.edit', __('translation.edit')),
             new AddUserToProjectAction,
             new SoftDeleteProjectAction,
         ];
