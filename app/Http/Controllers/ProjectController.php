@@ -14,6 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        //$this->authorize('viewAny', Project::class);
         return view(
             'projects.index',
             [
@@ -66,9 +67,9 @@ class ProjectController extends Controller
     {
         return view(
             'projects.form',
-                [
-                    'project' => $project
-                ],
+            [
+                'project' => $project
+            ],
         );
     }
 

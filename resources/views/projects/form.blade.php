@@ -7,7 +7,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white shadow-xl sm:rounded-lg">
                     @if (isset($project))
-                        <livewire:projects.project-form :project=$project" :editMode="true" />
+                        <livewire:projects.project-form :project="$project" :editMode="true" />
                     @else
                         <livewire:projects.project-form :editMode="false" />
                     @endif
