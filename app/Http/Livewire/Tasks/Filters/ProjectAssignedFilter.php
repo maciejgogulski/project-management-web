@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Tasks\Filters;
 
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Filters\Filter;
 
@@ -16,16 +17,15 @@ class ProjectAssignedFilter extends Filter
     }
 
     public function apply(Builder $query, $value, $request): Builder {
-        if ($value == 1) {
-            return $query->whereNotNull('project_id');
-        }
-        return $query->whereNull('project_id');
+        return $query->whereHas('project', function (Builder $query) use ($value) {
+            $query-> where('id', '=', $value);
+        });
     }
 
     public function options(): array {
-        return [
-            __('translation.yes') => 1,
-            __('translation.no') => 0,
-        ];
+        $projects = Project::all();
+        $labels = $projects->pluck('name');
+        $values = $projects->pluck('id');
+        return $labels->combine($values)->toArray();
     }
 }
