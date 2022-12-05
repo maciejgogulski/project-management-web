@@ -12,4 +12,8 @@ return [
             'admin_role_removed' => 'Odebrano rolę admina',
         ],
     ],
+    'actions' => [
+        'remove_admin_role' => 'Usuń rolę admina',
+        'assign_admin_role' => 'Przypisz rolę admina',
+    ]
 ];

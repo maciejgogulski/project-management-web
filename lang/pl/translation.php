@@ -17,6 +17,8 @@ return [
     'edit' => 'Edytuj',
     'delete' => 'Usuń',
     'back' => 'Cofnij',
-    'save' => 'Zapisz'
+    'save' => 'Zapisz',
+    'user' => 'Użytkownik',
+    'project' => 'Projekt'
 
 ];

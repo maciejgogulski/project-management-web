@@ -36,7 +36,9 @@ class TasksTableView extends TableView
     {
         return [
             Header::title(__('tasks.attributes.name'))->sortBy('name'),
-            Header::title(__('tasks.attributes.deadline'))->sortBy('name'),
+            Header::title(__('translation.project'))->sortBy('project'),
+            Header::title(__('translation.user'))->sortBy('user'),
+            Header::title(__('tasks.attributes.deadline'))->sortBy('deadline'),
             Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
             Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
@@ -52,6 +54,8 @@ class TasksTableView extends TableView
     {
         return [
             $model->name,
+            $model->project->name ?? '',
+            $model->user->name ?? '',
             $model->deadline,
             $model->created_at,
             $model->updated_at,
