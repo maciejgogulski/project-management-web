@@ -18,6 +18,7 @@ class ProjectFactory extends Factory
     {
         return [
             'name' => $this->faker->words(3, true),
+            'user_id' => $this->faker->optional()->numberBetween(1, 12),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks'

@@ -24,7 +24,7 @@ class AddUserToProjectAction extends Action
     public function __construct()
     {
         parent::__construct();
-        $this->title = __('project.actions.project_add_user');
+        $this->title = __('projects.actions.add_user');
     }
 
     /**

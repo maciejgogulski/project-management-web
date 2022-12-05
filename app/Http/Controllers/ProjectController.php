@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\Task;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -15,6 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Project::class);
         return view(
             'projects.index',
             [
@@ -30,7 +30,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('viewAny', Project::class);
+        return view(
+            'projects.form',
+        );
     }
 
     /**
@@ -41,7 +44,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('viewAny', Project::class);
     }
 
     /**
@@ -52,7 +55,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('viewAny', Project::class);
     }
 
     /**
@@ -61,9 +64,15 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        $this->authorize('viewAny', Project::class);
+        return view(
+            'projects.form',
+            [
+                'project' => $project
+            ],
+        );
     }
 
     /**
@@ -75,7 +84,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('viewAny', Project::class);
     }
 
     /**
@@ -86,6 +95,6 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('viewAny', Project::class);
     }
 }

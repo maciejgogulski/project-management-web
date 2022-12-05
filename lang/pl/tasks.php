@@ -3,7 +3,10 @@
 return [
     'attributes' => [
         'name' => 'Nazwa',
-        'deadline' => 'Termin'
+        'deadline' => 'Termin',
+        'project_assigned' => 'Przypisane do projektu',
+        'user_assigned' => 'Przypisane do użytkownika',
+        'completed' => 'Ukończone',
     ],
     'actions' => [],
     'messages' => [

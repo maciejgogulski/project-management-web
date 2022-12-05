@@ -65,4 +65,14 @@ class User extends Authenticatable
     {
         return $this->hasRole(config('auth.roles.admin'));
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

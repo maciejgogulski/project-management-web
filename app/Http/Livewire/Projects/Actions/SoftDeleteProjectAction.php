@@ -26,7 +26,7 @@ class SoftDeleteProjectAction extends Action
     public function __construct()
     {
         parent::__construct();
-        $this->title = __('project.actions.project_soft_delete');
+        $this->title = __('translation.delete');
     }
     /**
      * Execute the action when the user clicked on the button
@@ -37,7 +37,7 @@ class SoftDeleteProjectAction extends Action
     public function handle(Project $model, View $view)
     {
         $model->delete();
-        $this->success(__('projects.messages.successes.project_soft_deleted'));
+        $this->success(__('projects.messages.successes.deleted', ['name' => $model->name]));
     }
 
     public function renderIf($model, View $view)

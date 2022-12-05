@@ -14,6 +14,7 @@ class TaskController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Task::class);
         return view(
             'tasks.index',
             [
@@ -29,7 +30,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('viewAny', Task::class);
     }
 
     /**
@@ -40,7 +41,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('viewAny', Task::class);
     }
 
     /**
@@ -51,7 +52,7 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('viewAny', Task::class);
     }
 
     /**
@@ -62,7 +63,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->authorize('viewAny', Task::class);
     }
 
     /**
@@ -74,7 +75,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('viewAny', Task::class);
     }
 
     /**
@@ -85,6 +86,6 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('viewAny', Task::class);
     }
 }

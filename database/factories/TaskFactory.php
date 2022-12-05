@@ -18,6 +18,9 @@ class TaskFactory extends Factory
     {
         return [
             'name' => $this->faker->words(3, true),
+            'project_id' => $this->faker->optional()->numberBetween(1, 50),
+            'user_id' => $this->faker->optional()->numberBetween(1, 12),
+            'completed' => $this->faker->boolean(),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks'
