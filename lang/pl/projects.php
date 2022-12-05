@@ -7,7 +7,7 @@ return [
         'create' => 'Dodaj projekt',
         'update' => 'Zaktualizuj projekt',
         'delete' => 'Usuń projekt',
-        'add_user' => 'Dodaj użytkownika do projektu'
+        'add_user' => 'Dodaj użytkownika'
     ],
     'labels' => [
         'create_form_title' => 'Tworzenie nowego projektu',

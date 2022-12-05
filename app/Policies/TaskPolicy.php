@@ -2,14 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProjectPolicy
+class TaskPolicy
 {
     use HandlesAuthorization;
-    //TODO Gdy będą zdefiniowane powiązania z tabelą user, utworzyć obsługę manage_self dla projektów i zadań
+
     /**
      * Determine whether the user can view any models.
      *
@@ -18,19 +18,19 @@ class ProjectPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('projects.manage');
+        return $user->can('tasks.manage');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Project $project)
+    public function view(User $user, Task $task)
     {
-        return $user->can('projects.manage');
+        return $user->can('tasks.manage');
     }
 
     /**
@@ -41,57 +41,57 @@ class ProjectPolicy
      */
     public function create(User $user)
     {
-        return $user->can('projects.manage');
+        return $user->can('tasks.manage');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Project $project)
+    public function update(User $user, Task $task)
     {
-        return $project->deleted_at === null
-        && $user->can('projects.manage');
+        return $task->deleted_at === null
+            && $user->can('tasks.manage');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Project $project)
+    public function delete(User $user, Task $task)
     {
-        return $project->deleted_at === null
-        && $user->can('projects.manage');
+        return $task->deleted_at === null
+            && $user->can('tasks.manage');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Project $project)
+    public function restore(User $user, Task $task)
     {
-        return $project->deleted_at !== null
-        && $user->can('projects.manage');
+        return $task->deleted_at !== null
+            && $user->can('tasks.manage');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Project $project)
+    public function forceDelete(User $user, Task $task)
     {
-        return $user->can('projects.manage');
+        return $user->can('tasks.manage');
     }
 }
