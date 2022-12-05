@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Http\Livewire\Users\Filters;
+namespace App\Http\Livewire\Tasks\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Filters\Filter;
-use Spatie\Permission\Models\Role;
 
-class EmailVerifiedFilter extends Filter
+class CompletedFilter extends Filter
 {
     public $title = '';
 
     public function __construct()
     {
         parent::__construct();
-        $this->title = __('users.attributes.email_verified_at');
+        $this->title = __('tasks.attributes.completed');
     }
 
     public function apply(Builder $query, $value, $request): Builder {
         if ($value == 1) {
-            return $query->whereNotNull('email_verified_at');
+            return $query->where('completed', true);
         }
-        return $query->whereNull('email_verified_at');
+        return $query->where('completed', false);
     }
 
     public function options(): array {

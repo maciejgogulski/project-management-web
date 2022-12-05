@@ -12,4 +12,3 @@
         </div>
     </div>
 </x-app-layout>
-<!-- TODO: Poprawić ścieżkę do widoku tabeli

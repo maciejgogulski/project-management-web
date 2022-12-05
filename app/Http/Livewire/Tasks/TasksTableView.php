@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire\Tasks;
 
+use App\Http\Livewire\Tasks\Filters\CompletedFilter;
+use App\Http\Livewire\Tasks\Filters\ProjectAssignedFilter;
+use App\Http\Livewire\Tasks\Filters\UserAssignedFilter;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Facades\Header;
@@ -38,6 +41,7 @@ class TasksTableView extends TableView
             Header::title(__('tasks.attributes.name'))->sortBy('name'),
             Header::title(__('translation.project'))->sortBy('project'),
             Header::title(__('translation.user'))->sortBy('user'),
+            Header::title(__('tasks.attributes.completed'))->sortBy('completed'),
             Header::title(__('tasks.attributes.deadline'))->sortBy('deadline'),
             Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
@@ -56,10 +60,20 @@ class TasksTableView extends TableView
             $model->name,
             $model->project->name ?? '',
             $model->user->name ?? '',
+            $model->completed ? __('translation.yes') : __('translation.no'),
             $model->deadline,
             $model->created_at,
             $model->updated_at,
             $model->deleted_at,
+        ];
+    }
+
+    protected function filters()
+    {
+        return [
+            new CompletedFilter,
+            new ProjectAssignedFilter,
+            new UserAssignedFilter,
         ];
     }
 }
