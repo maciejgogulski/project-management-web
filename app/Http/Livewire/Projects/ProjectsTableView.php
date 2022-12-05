@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Projects;
 use App\Http\Livewire\Projects\Actions\AddUserToProjectAction;
 use App\Http\Livewire\Projects\Actions\EditProjectAction;
 use App\Http\Livewire\Projects\Actions\SoftDeleteProjectAction;
+use App\Http\Livewire\Projects\Filters\HasTasksFilter;
+use App\Http\Livewire\Projects\Filters\ManagerAssignedFilter;
 use App\Http\Livewire\Users\Actions\AssignAdminRoleAction;
 use App\Http\Livewire\Users\Actions\RemoveAdminRoleAction;
 use App\Models\Project;
@@ -45,6 +47,8 @@ class ProjectsTableView extends TableView
     {
         return [
             Header::title(__('projects.attributes.name'))->sortBy('name'),
+            Header::title(__('projects.attributes.manager'))->sortBy('user'),
+            Header::title(__('translation.navigation.tasks')),
             Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
             Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
@@ -60,6 +64,8 @@ class ProjectsTableView extends TableView
     {
         return [
             $model->name,
+            $model->user->name ?? '',
+            $model->tasks->implode('name', ', '),
             $model->created_at,
             $model->updated_at,
             $model->deleted_at,
@@ -72,6 +78,14 @@ class ProjectsTableView extends TableView
             new EditProjectAction('projects.edit', __('translation.edit')),
             new AddUserToProjectAction,
             new SoftDeleteProjectAction,
+        ];
+    }
+
+    protected function filters()
+    {
+        return [
+            new ManagerAssignedFilter,
+            new HasTasksFilter,
         ];
     }
 }

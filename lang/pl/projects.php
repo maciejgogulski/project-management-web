@@ -2,6 +2,9 @@
 return [
     'attributes' => [
         'name' => 'Nazwa',
+        'manager' => 'Właściciel',
+        'manager_assigned' => 'Przypisano właściciela',
+        'has_tasks' => 'Ma zadania'
     ],
     'actions' => [
         'create' => 'Dodaj projekt',
