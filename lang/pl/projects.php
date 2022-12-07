@@ -4,7 +4,8 @@ return [
         'name' => 'Nazwa',
         'manager' => 'Właściciel',
         'manager_assigned' => 'Przypisano właściciela',
-        'has_tasks' => 'Ma zadania'
+        'has_tasks' => 'Ma zadania',
+        'number_of_tasks' => 'Liczba zadań'
     ],
     'actions' => [
         'create' => 'Dodaj projekt',
@@ -13,6 +14,7 @@ return [
         'add_user' => 'Dodaj użytkownika'
     ],
     'labels' => [
+        'create' => 'Stwórz projekt',
         'create_form_title' => 'Tworzenie nowego projektu',
         'edit_form_title' => 'Edycja projektu',
     ],

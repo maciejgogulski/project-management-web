@@ -32,5 +32,10 @@ UI components used:
     <div>
       @include('laravel-views::components.toolbar.filters')
     </div>
+      @foreach($buttons as $button)
+      <div>
+          <x-button href="{{ route($button->route) }}" secondary class="mr-2" label="{{ $button->label }}"></x-button>
+      </div>
+      @endforeach
   </div>
 </div>

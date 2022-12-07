@@ -18,6 +18,7 @@ return [
     'delete' => 'Usuń',
     'back' => 'Cofnij',
     'save' => 'Zapisz',
+    'create' => 'Dodaj',
     'user' => 'Użytkownik',
     'project' => 'Projekt'
 
