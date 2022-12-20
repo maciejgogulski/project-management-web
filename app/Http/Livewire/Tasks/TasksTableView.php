@@ -25,6 +25,23 @@ class TasksTableView extends TableView
         'deleted_at'
     ];
 
+    public $buttons;
+
+    public function __construct($id = null)
+    {
+        parent::__construct($id);
+        $this->buttons = $this->buttons();
+    }
+
+    public function buttons():array {
+        return [
+            'create' => [
+                'route' => 'tasks.create',
+                'label' => __('tasks.labels.create'),
+            ],
+        ];
+    }
+
     public function repository():Builder
     {
         return Task::query()->withTrashed();

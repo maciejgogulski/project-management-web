@@ -20,11 +20,6 @@ class ProjectsTableView extends TableView
      */
     protected $model = Project::class;
 
-    /**
-     * Sets the headers of the table as you want to be displayed
-     *
-     * @return array<string> Array of headers
-     */
     public $searchBy = [
         'name',
         'created_at',
@@ -32,12 +27,23 @@ class ProjectsTableView extends TableView
         'deleted_at'
     ];
 
-//    public $buttons = [
-//        'create' => [
-//            'route' => 'projects.create',
-//            'label' => 'projects.create',
-//        ],
-//    ];
+    public $buttons;
+
+    public function __construct($id = null)
+    {
+        parent::__construct($id);
+        $this->buttons = $this->buttons();
+    }
+
+
+    public function buttons():array {
+        return [
+            'create' => [
+                'route' => 'projects.create',
+                'label' => __('projects.labels.create'),
+            ],
+        ];
+    }
 
     public function repository():Builder
     {

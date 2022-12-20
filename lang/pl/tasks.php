@@ -12,4 +12,7 @@ return [
     'messages' => [
         'successes' => [],
     ],
+    'labels' => [
+        'create' => 'Stwórz zadanie',
+    ],
 ];
