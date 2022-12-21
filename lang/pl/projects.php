@@ -4,8 +4,10 @@ return [
         'name' => 'Nazwa',
         'manager' => 'Właściciel',
         'manager_assigned' => 'Przypisano właściciela',
+        'manager_unassigned' => 'Nie przypisano właściciela',
         'has_tasks' => 'Ma zadania',
-        'number_of_tasks' => 'Liczba zadań'
+        'number_of_tasks' => 'Liczba zadań',
+        'no_tasks' => 'Brak zadań',
     ],
     'actions' => [
         'create' => 'Dodaj projekt',
