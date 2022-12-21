@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Tasks;
 
+use App\Http\Livewire\Tasks\Actions\EditTaskAction;
+use App\Http\Livewire\Tasks\Actions\SoftDeleteTaskAction;
 use App\Http\Livewire\Tasks\Filters\CompletedFilter;
 use App\Http\Livewire\Tasks\Filters\ProjectAssignedFilter;
 use App\Http\Livewire\Tasks\Filters\UserAssignedFilter;
@@ -91,6 +93,14 @@ class TasksTableView extends TableView
             new CompletedFilter,
             new ProjectAssignedFilter,
             new UserAssignedFilter,
+        ];
+    }
+
+    protected function actionsByRow(): array
+    {
+        return [
+            new EditTaskAction('tasks.edit', __('translation.edit')),
+            new SoftDeleteTaskAction,
         ];
     }
 }

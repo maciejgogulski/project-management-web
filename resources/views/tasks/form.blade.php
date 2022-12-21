@@ -7,7 +7,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white shadow-xl sm:rounded-lg">
                     @if (isset($task))
-                        <livewire:tasks.task-form :task="task" :editMode="true" />
+                        <livewire:tasks.task-form :task="$task" :editMode="true" />
                     @else
                         <livewire:tasks.task-form :editMode="false" />
                     @endif
