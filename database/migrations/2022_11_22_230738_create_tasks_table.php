@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name', 50);
             $table->foreignId('project_id')->nullable()->constrained();
             $table->foreignId('user_id')->nullable()->constrained();
-            $table->boolean('completed');
+            $table->boolean('completed')->default(false);
             $table->dateTime('deadline');
-            $table->integer('time_spent'); // in minutes
+            $table->integer('time_spent')->default(0); // in minutes
             $table->timestamps();
             $table->softDeletes();
         });

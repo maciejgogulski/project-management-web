@@ -20,6 +20,7 @@ return [
     ],
     'placeholders' => [
         'enter_name' => 'Wprowadź nazwę',
+        'choose_manager' => 'Wybierz właściciela'
     ],
     'messages' => [
         'successes' => [

@@ -15,12 +15,29 @@
                 </label>
             </div>
             <div class="">
-                <x-input wire:model="project.name" placeholder="{{ __('projects.placeholders.enter_name') }}" />
+                <x-input wire:model="project.name" placeholder="{{ __('projects.placeholders.enter_name') }}"/>
+            </div>
+        </div>
+        <hr class="my-2">
+        <div class="grid grid-cols-2 gap-2">
+            <div class="">
+                <label for="user">
+                    {{ __('projects.attributes.manager') }}
+                </label>
+            </div>
+            <div class="">
+                <x-select
+                    wire:model="project.user_id" placeholder="{{ __('projects.placeholders.choose_manager') }}"
+                    :async-data="route('async.users')"
+                    option-label="name"
+                    option-value="id"
+                />
             </div>
         </div>
         <hr class="my-2">
         <div class="flex justify-end pt-2">
-            <x-button href="{{ route('projects.index') }}" secondary class="mr-2" label="{{ __('translation.back') }}"></x-button>
+            <x-button href="{{ route('projects.index') }}" secondary class="mr-2"
+                      label="{{ __('translation.back') }}"></x-button>
             <x-button type="submit" primary label="{{ __('translation.save') }}" spinner></x-button>
         </div>
     </form>

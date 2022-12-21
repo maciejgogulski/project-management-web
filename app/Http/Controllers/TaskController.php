@@ -31,6 +31,9 @@ class TaskController extends Controller
     public function create()
     {
         $this->authorize('viewAny', Task::class);
+        return view(
+            'tasks.form',
+        );
     }
 
     /**
@@ -61,9 +64,15 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
         $this->authorize('viewAny', Task::class);
+        return view(
+            'tasks.form',
+            [
+                'task' => $task
+            ],
+        );
     }
 
     /**
