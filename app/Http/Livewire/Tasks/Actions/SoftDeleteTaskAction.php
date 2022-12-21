@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Tasks\Actions;
 use App\Actions\Current;
 use App\Actions\Model;
 use App\Models\Task;
-use Illuminate\Support\Facades\Auth;
 use LaravelViews\Actions\Action;
 use LaravelViews\Views\View;
 
