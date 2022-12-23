@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Tasks\Actions;
+namespace App\Http\Livewire\Actions;
 
 use App\Actions\Current;
-use App\Actions\Model;
-use App\Models\Task;
+use Illuminate\Database\Eloquent\Model;
 use LaravelViews\Actions\Action;
 use LaravelViews\Views\View;
 
-class SoftDeleteTaskAction extends Action
+class SoftDeleteAction extends Action
 {
     /**
      * Any title you want to be displayed
@@ -33,10 +32,10 @@ class SoftDeleteTaskAction extends Action
      * @param $model Model object of the list where the user has clicked
      * @param $view Current view where the action was executed from
      */
-    public function handle(Task $model, View $view)
+    public function handle(Model $model, View $view)
     {
         $model->delete();
-        $this->success(__('projects.messages.successes.deleted', ['name' => $model->name]));
+        $this->success(__('translation.messages.successes.deleted') . ' ' .$model->name);
     }
 
     public function renderIf($model, View $view)

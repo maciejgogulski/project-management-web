@@ -68,6 +68,8 @@ class ProjectForm extends Component
             $project->save();
         });
 
+        $this->redirect(route('projects.show', [$project]));
+
         $this->notification()->success(
             $this->editMode
                 ? __('translation.messages.successes.updated_title')
@@ -76,6 +78,5 @@ class ProjectForm extends Component
                 ? __('projects.messages.successes.updated', ['name' => $this->project->name])
                 : __('projects.messages.successes.stored', ['name' => $this->project->name])
         );
-        $this->editMode = true;
     }
 }

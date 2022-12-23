@@ -30,7 +30,7 @@
                 <div class="grid grid-cols-1 gap-2">
                     @if($project->tasks->count() > 0)
                         @foreach($project->tasks as $task)
-                            <a href="{{ route('tasks.show') }}" class="hover:bg-gray-100"> {{ $task->name }} </a>
+                            <a href="{{ route('tasks.show', [$task]) }}" class="hover:bg-gray-100"> {{ $task->name }} </a>
                         @endforeach
                     @else
                         <p> {{__('projects.attributes.no_tasks')}} </p>
@@ -39,7 +39,10 @@
             </div>
         </div>
         <div class="flex justify-end pt-2">
-
+            <x-button href="{{ route('projects.edit', [$project]) }}" primary class="mr-2"
+                      label="{{ __('translation.edit') }}"></x-button>
+            <x-button href="{{ route('projects.index') }}" secondary class="mr-2"
+                      label="{{ __('translation.back') }}"></x-button>
         </div>
     </form>
 </div>
