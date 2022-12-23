@@ -37,7 +37,7 @@ Route::middleware([
     });
 
     Route::resource('tasks', TaskController::class)->only(
-        ['index', 'create', 'edit']
+        ['index', 'create', 'edit', 'show']
     );
     Route::resource('projects', ProjectController::class)->only([
         'index', 'create', 'edit', 'show'

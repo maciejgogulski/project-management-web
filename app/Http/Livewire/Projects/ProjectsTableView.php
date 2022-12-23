@@ -2,10 +2,9 @@
 
 namespace App\Http\Livewire\Projects;
 
-use App\Http\Livewire\Projects\Actions\AddUserToProjectAction;
-use App\Http\Livewire\Projects\Actions\EditProjectAction;
-use App\Http\Livewire\Projects\Actions\ShowProjectAction;
-use App\Http\Livewire\Projects\Actions\SoftDeleteProjectAction;
+use App\Http\Livewire\Actions\EditAction;
+use App\Http\Livewire\Actions\ShowAction;
+use App\Http\Livewire\Actions\SoftDeleteAction;
 use App\Http\Livewire\Projects\Filters\HasTasksFilter;
 use App\Http\Livewire\Projects\Filters\ManagerAssignedFilter;
 use App\Models\Project;
@@ -87,9 +86,9 @@ class ProjectsTableView extends TableView
     protected function actionsByRow(): array
     {
         return [
-            new ShowProjectAction('projects.show', __('translation.show')),
-            new EditProjectAction('projects.edit', __('translation.edit')),
-            new SoftDeleteProjectAction,
+            new ShowAction('projects.show', __('translation.show')),
+            new EditAction('projects.edit', __('translation.edit')),
+            new SoftDeleteAction,
         ];
     }
 

@@ -5,7 +5,9 @@ return [
         'name' => 'Nazwa',
         'deadline' => 'Termin',
         'project_assigned' => 'Przypisane do projektu',
+        'project_unassigned' => 'Nie przypisano do projektu',
         'user_assigned' => 'Przypisane do użytkownika',
+        'user_unassigned' => 'Nie przypisano do użytkownika',
         'completed' => 'Ukończone',
         'user' => 'Użytkownik',
         'project' => 'Projekt'

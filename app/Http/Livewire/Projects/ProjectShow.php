@@ -4,8 +4,6 @@ namespace App\Http\Livewire\Projects;
 
 use App\Models\Project;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 

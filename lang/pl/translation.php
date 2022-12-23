@@ -12,14 +12,21 @@ return [
         'tasks' => 'Zadania',
         'projects' => 'Projekty',
     ],
+    'messages' => [
+        'successes' => [
+            'deleted' => 'Usunięto'
+        ]
+    ],
     'yes' => 'Tak',
     'no' => 'Nie',
+    'show' => 'Wyświetl',
     'edit' => 'Edytuj',
     'delete' => 'Usuń',
     'back' => 'Cofnij',
     'save' => 'Zapisz',
     'create' => 'Dodaj',
     'user' => 'Użytkownik',
-    'project' => 'Projekt'
+    'project' => 'Projekt',
+    'task' => 'Zadanie',
 
 ];
