@@ -30,7 +30,11 @@
                 <div class="grid grid-cols-1 gap-2">
                     @if($project->tasks->count() > 0)
                         @foreach($project->tasks as $task)
-                            <a href="{{ route('tasks.show', [$task]) }}" class="hover:bg-gray-100"> {{ $task->name }} </a>
+                            @if($task->completed)
+                                <a href="{{ route('tasks.show', [$task]) }}" class="bg-green-100 hover:bg-green-200"> {{ $task->name }} </a>
+                            @else
+                                <a href="{{ route('tasks.show', [$task]) }}" class="hover:bg-gray-100"> {{ $task->name }} </a>
+                            @endif
                         @endforeach
                     @else
                         <p> {{__('projects.attributes.no_tasks')}} </p>

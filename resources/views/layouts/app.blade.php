@@ -20,7 +20,11 @@
         <!--<script src="//unpkg.com/alpinejs" defer></script> -->
     </head>
     <body class="font-sans antialiased">
+
+
         <x-jet-banner />
+
+        <x-notifications z-index="z-50" />
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')

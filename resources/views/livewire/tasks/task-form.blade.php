@@ -69,6 +69,27 @@
             </div>
         </div>
         <hr class="my-2">
+        <div class="grid grid-cols-2 gap-2">
+            <div class="">
+                <label for="completed">
+                    {{ __('tasks.attributes.completed') }}
+                </label>
+            </div>
+            <div class=""> <!-- TODO Poprawić pole Ukończone w formularzu  -->
+                <x-select
+                    wire:model="task.completed"
+                    placeholder="{{ __('tasks.placeholders.status') }}"
+                    :options="[
+                        ['name' => 'Nie',  'id' => 0],
+                        ['name' => 'Tak',  'id' => 1],
+                    ]"
+                    option-label="name"
+                    option-value="id"
+
+                />
+            </div>
+        </div>
+        <hr class="my-2">
         <div class="flex justify-end pt-2">
             <x-button href="{{ route('tasks.index') }}" secondary class="mr-2"
                       label="{{ __('translation.back') }}"></x-button>
