@@ -15,12 +15,12 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    @can('tasks.manage')
+                    @can('tasks.manage_self')
                         <x-jet-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('tasks.index')">
                             {{ __('translation.navigation.tasks') }}
                         </x-jet-nav-link>
                     @endcan
-                    @can('projects.manage')
+                    @can('projects.manage_self')
                     <x-jet-nav-link href="{{ route('projects.index') }}" :active="request()->routeIs('projects.index')">
                         {{ __('translation.navigation.projects') }}
                     </x-jet-nav-link>
@@ -160,12 +160,12 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('translation.navigation.dashboard') }}
             </x-jet-responsive-nav-link>
-            @can('tasks.manage')
+            @can('tasks.manage_self')
                 <x-jet-responsive-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('tasks.index')">
                     {{ __('translation.navigation.tasks') }}
                 </x-jet-responsive-nav-link>
             @endcan
-            @can('projects.manage')
+            @can('projects.manage_self')
             <x-jet-responsive-nav-link href="{{ route('projects.index') }}" :active="request()->routeIs('projects.index')">
                 {{ __('translation.navigation.projects') }}
             </x-jet-responsive-nav-link>

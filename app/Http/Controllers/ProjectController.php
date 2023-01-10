@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -15,12 +17,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Project::class);
+        //dd(Auth::user()->projects);
+        $this->authorize('projects.manage_self', Project::class);
         return view(
             'projects.index',
-            [
-                'projects' => Project::withTrashed()->get()
-            ]
         );
     }
 
@@ -56,7 +56,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $this->authorize('viewAny', Project::class);
+        if (!Auth::user()->isAdmin()) {
+            if ($project->user == null || Auth::user()->id != $project->user->id) {
+                abort(403);
+            }
+        }
         return view(
             'projects.show',
             [

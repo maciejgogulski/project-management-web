@@ -14,15 +14,11 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Task::class);
+        $this->authorize('tasks.manage_self', Task::class);
         return view(
             'tasks.index',
-            [
-                'tasks' => Task::withTrashed()->get()
-            ]
         );
     }
-
     /**
      * Show the form for creating a new resource.
      *

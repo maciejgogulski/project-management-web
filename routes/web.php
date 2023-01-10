@@ -39,9 +39,10 @@ Route::middleware([
     Route::resource('tasks', TaskController::class)->only(
         ['index', 'create', 'edit', 'show']
     );
+
     Route::resource('projects', ProjectController::class)->only([
-        'index', 'create', 'edit', 'show'
-    ]);
+        'index', 'create', 'edit', 'show']
+    );
 
     Route::get('async/users', [UserController::class, 'async'])
     ->name('async.users');

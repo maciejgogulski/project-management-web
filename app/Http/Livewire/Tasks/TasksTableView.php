@@ -11,8 +11,10 @@ use App\Http\Livewire\Tasks\Actions\SoftDeleteTaskAction;
 use App\Http\Livewire\Tasks\Filters\CompletedFilter;
 use App\Http\Livewire\Tasks\Filters\ProjectAssignedFilter;
 use App\Http\Livewire\Tasks\Filters\UserAssignedFilter;
+use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 
@@ -50,7 +52,11 @@ class TasksTableView extends TableView
 
     public function repository():Builder
     {
-        return Task::query()->withTrashed();
+        if (Auth::user()->isAdmin()) {
+            return Task::query()->withTrashed();
+        }
+        return Task::query()
+            ->where('user_id', '=', Auth::user()->id);
     }
 
     /**
@@ -60,15 +66,24 @@ class TasksTableView extends TableView
      */
     public function headers(): array
     {
+        if (Auth::user()->isAdmin()) {
+            return [
+                Header::title(__('tasks.attributes.name'))->sortBy('name'),
+                Header::title(__('translation.project'))->sortBy('project'),
+                Header::title(__('translation.user'))->sortBy('user'),
+                Header::title(__('tasks.attributes.completed'))->sortBy('completed'),
+                Header::title(__('tasks.attributes.deadline'))->sortBy('deadline'),
+                Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
+                Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
+                Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
+            ];
+        }
+
         return [
             Header::title(__('tasks.attributes.name'))->sortBy('name'),
             Header::title(__('translation.project'))->sortBy('project'),
-            Header::title(__('translation.user'))->sortBy('user'),
             Header::title(__('tasks.attributes.completed'))->sortBy('completed'),
             Header::title(__('tasks.attributes.deadline'))->sortBy('deadline'),
-            Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
-            Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
-            Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
         ];
     }
 
@@ -79,15 +94,24 @@ class TasksTableView extends TableView
      */
     public function row($model): array
     {
+        if (Auth::user()->isAdmin()) {
+            return [
+                $model->name,
+                $model->project->name ?? '',
+                $model->user->name ?? '',
+                $model->completed ? __('translation.yes') : __('translation.no'),
+                $model->deadline,
+                $model->created_at,
+                $model->updated_at,
+                $model->deleted_at,
+            ];
+        }
+
         return [
             $model->name,
             $model->project->name ?? '',
-            $model->user->name ?? '',
             $model->completed ? __('translation.yes') : __('translation.no'),
             $model->deadline,
-            $model->created_at,
-            $model->updated_at,
-            $model->deleted_at,
         ];
     }
 

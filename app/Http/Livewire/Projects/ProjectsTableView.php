@@ -9,6 +9,7 @@ use App\Http\Livewire\Projects\Filters\HasTasksFilter;
 use App\Http\Livewire\Projects\Filters\ManagerAssignedFilter;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 
@@ -47,7 +48,11 @@ class ProjectsTableView extends TableView
 
     public function repository():Builder
     {
-        return Project::query()->withTrashed();
+        if (Auth::user()->isAdmin()) {
+            return Project::query()->withTrashed();
+        }
+        return Project::query()
+            ->where('user_id', '=', Auth::user()->id);
     }
     /**
      * Sets the headers of the table as you want to be displayed
@@ -56,13 +61,21 @@ class ProjectsTableView extends TableView
      */
     public function headers(): array
     {
+        if (Auth::user()->isAdmin()) {
+            return [
+                Header::title(__('projects.attributes.name'))->sortBy('name'),
+                Header::title(__('projects.attributes.manager'))->sortBy('user'),
+                Header::title(__('projects.attributes.number_of_tasks')),
+                Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
+                Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
+                Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
+            ];
+        }
+
         return [
             Header::title(__('projects.attributes.name'))->sortBy('name'),
             Header::title(__('projects.attributes.manager'))->sortBy('user'),
             Header::title(__('projects.attributes.number_of_tasks')),
-            Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
-            Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
-            Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
         ];
     }
 
@@ -73,13 +86,21 @@ class ProjectsTableView extends TableView
      */
     public function row($model): array
     {
+        if (Auth::user()->isAdmin()) {
+            return [
+                $model->name,
+                $model->user->name ?? '',
+                $model->tasks->count(),
+                $model->created_at,
+                $model->updated_at,
+                $model->deleted_at,
+            ];
+        }
+
         return [
             $model->name,
             $model->user->name ?? '',
-            $model->tasks->count(),
-            $model->created_at,
-            $model->updated_at,
-            $model->deleted_at,
+            $model->tasks->count()
         ];
     }
 
