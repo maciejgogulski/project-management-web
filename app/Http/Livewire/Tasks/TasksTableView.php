@@ -42,12 +42,15 @@ class TasksTableView extends TableView
     }
 
     public function buttons():array {
-        return [
-            'create' => [
-                'route' => 'tasks.create',
-                'label' => __('tasks.labels.create'),
-            ],
-        ];
+        if (Auth::user()->can('tasks.manage')) {
+            return [
+                'create' => [
+                    'route' => 'tasks.create',
+                    'label' => __('tasks.labels.create'),
+                ],
+            ];
+        }
+        return [];
     }
 
     public function repository():Builder

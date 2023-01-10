@@ -17,7 +17,6 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //dd(Auth::user()->projects);
         $this->authorize('projects.manage_self', Project::class);
         return view(
             'projects.index',
@@ -31,7 +30,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $this->authorize('viewAny', Project::class);
+        $this->authorize('projects.manage', Project::class);
         return view(
             'projects.form',
         );
@@ -77,7 +76,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $this->authorize('viewAny', Project::class);
+        if (!Auth::user()->isAdmin()) {
+            if ($project->user == null || Auth::user()->id != $project->user->id) {
+                abort(403);
+            }
+        }
         return view(
             'projects.form',
             [
@@ -104,12 +107,12 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        $this->authorize('viewAny', Project::class);
     }
 
     public function async(Request $request) {
+        // TODO Pobranie projektów należących do zwykłego usera, potrzebne do formularza dadawania i edycji zadania.
         $this->authorize('viewAny', Project::class);
         return Project::query()
             ->select('id', 'name')
