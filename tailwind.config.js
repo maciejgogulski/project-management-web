@@ -12,7 +12,9 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './vendor/wireui/wireui/resources/**/*.blade.php',
         './vendor/wireui/wireui/ts/**/*.ts',
-        './vendor/wireui/wireui/src/View/**/*.php'
+        './vendor/wireui/wireui/src/View/**/*.php',
+        './src/**/*.{html,js}',
+        './node_modules/tw-elements/dist/js/**/*.js'
     ],
 
     theme: {
@@ -23,5 +25,9 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+        require('tw-elements/dist/plugin'),
+    ],
 };

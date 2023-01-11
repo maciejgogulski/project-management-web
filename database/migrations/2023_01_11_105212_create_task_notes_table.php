@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('task_id')->constrained();
             $table->string('content');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

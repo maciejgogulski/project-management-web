@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProjectNotes;
-use App\Models\TaskNotes;
+use App\Models\ProjectNote;
+use App\Models\TaskNote;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +16,7 @@ class NotesSeeder extends Seeder
      */
     public function run()
     {
-        ProjectNotes::factory()->count(90)->create();
-        TaskNotes::factory()->count(900)->create();
+        ProjectNote::factory()->count(90)->create();
+        TaskNote::factory()->count(900)->create();
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class ProjectNotesFactory extends Factory
+class TaskNoteFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class ProjectNotesFactory extends Factory
     public function definition()
     {
         return [
-            'project_id' => $this->faker->numberBetween(1, 30),
+            'task_id' => $this->faker->numberBetween(1, 300),
             'content' => $this->faker->sentences(3, true),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
