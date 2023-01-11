@@ -6,24 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Task extends Model
+class ProjectNotes extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'name',
+        'content'
     ];
-
-    public function user() {
-        return $this->belongsTo(User::class);
-    }
 
     public function project() {
         return $this->belongsTo(Project::class);
-    }
-
-    public function notes() {
-        return $this->hasMany(ProjectNotes::class);
     }
 }
