@@ -41,7 +41,7 @@ class TaskForm extends Component
                     'required',
                     'date_format: Y-m-d H:i:s'
                 ],
-            ]
+            ],
         ];
     }
 

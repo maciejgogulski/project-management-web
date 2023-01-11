@@ -42,7 +42,7 @@ class TasksTableView extends TableView
     }
 
     public function buttons():array {
-        if (Auth::user()->can('tasks.manage')) {
+        if (Auth::user()->can('tasks.manage_self')) {
             return [
                 'create' => [
                     'route' => 'tasks.create',

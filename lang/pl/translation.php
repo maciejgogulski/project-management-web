@@ -14,6 +14,8 @@ return [
     ],
     'messages' => [
         'successes' => [
+            'updated_title' => 'Zaktualizowano',
+            'stored_title' => 'Utworzono',
             'deleted' => 'Usunięto'
         ]
     ],

@@ -9,12 +9,17 @@ return [
         'user_assigned' => 'Przypisane do użytkownika',
         'user_unassigned' => 'Nie przypisano do użytkownika',
         'completed' => 'Ukończone',
+        'not_completed' => 'Nieukończone',
         'user' => 'Użytkownik',
         'project' => 'Projekt'
     ],
     'actions' => [],
     'messages' => [
-        'successes' => [],
+        'successes' => [
+            'updated' => 'Zaktualizowano zadanie :name',
+            'stored' => 'Utworzono zadanie :name',
+            'deleted' => 'Usunięto zadanie :name',
+        ],
     ],
     'labels' => [
         'create' => 'Stwórz zadanie',
@@ -24,6 +29,7 @@ return [
     'placeholders' => [
         'enter_name' => 'Wprowadź nazwę',
         'choose_user' => 'Przypisz użytkownika',
-        'choose_project' => 'Przypisz do projektu'
+        'choose_project' => 'Przypisz do projektu',
+        'pick_deadline' => 'Wybierz termin'
     ],
 ];

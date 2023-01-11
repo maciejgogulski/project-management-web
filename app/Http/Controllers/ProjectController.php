@@ -111,24 +111,39 @@ class ProjectController extends Controller
     {
     }
 
-    public function async(Request $request) {
+    public function async(Request $request)
+    {
         // TODO Pobranie projektów należących do zwykłego usera, potrzebne do formularza dadawania i edycji zadania.
-        $this->authorize('viewAny', Project::class);
+        if (Auth::user()->can('projects.manage')) {
+            return Project::query()
+                ->select('id', 'name')
+                ->orderBy('name')
+                ->when(
+                    $request->search,
+                    fn(Builder $query) => $query->where('name', 'like', "%{$request->search}%")
+                )->when(
+                    $request->exists('selected'),
+                    fn(Builder $query) => $query->whereIn(
+                        'id',
+                        $request->input('selected', [])
+                    ),
+                    fn(Builder $query) => $query->limit(5)
+                )->get();
+        }
         return Project::query()
             ->select('id', 'name')
             ->orderBy('name')
+            ->where('user_id', '=' , Auth::user()->id)
             ->when(
                 $request->search,
-                fn (Builder $query)
-                => $query->where('name', 'like', "%{$request->search}%")
+                fn(Builder $query) => $query->where('name', 'like', "%{$request->search}%")
             )->when(
                 $request->exists('selected'),
-                fn (Builder $query)
-                => $query->whereIn(
+                fn(Builder $query) => $query->whereIn(
                     'id',
                     $request->input('selected', [])
                 ),
-                fn (Builder $query) => $query->limit(5)
+                fn(Builder $query) => $query->limit(5)
             )->get();
     }
 }

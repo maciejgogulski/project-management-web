@@ -37,6 +37,41 @@
             </div>
         </div>
         <hr class="my-2">
+        <div class="grid grid-cols-2 gap-2">
+            <div class="">
+                <label>
+                    {{ __('tasks.attributes.deadline') }}
+                </label>
+            </div>
+            <div class="">
+                <div class="">
+                    @if(isset($task->deadline))
+                        {{ $task->deadline }}
+                    @else
+                        {{__('tasks.attributes.deadline_not_set')}}
+                    @endif
+                </div>
+            </div>
+        </div>
+        <hr class="my-2">
+        <div class="grid grid-cols-2 gap-2">
+            <div class="">
+                <label>
+                    {{ __('tasks.attributes.completed') }}
+                </label>
+            </div>
+            <div class="">
+                <div class="">
+                    @if($task->completed)
+                        {{ __('translation.yes') }}
+                    @else
+                        {{ __('translation.no') }}
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-2">
         <div class="flex justify-end pt-2">
             <x-button href="{{ route('tasks.edit', [$task]) }}" primary class="mr-2"
                       label="{{ __('translation.edit') }}"></x-button>

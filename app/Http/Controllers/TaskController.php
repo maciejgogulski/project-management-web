@@ -27,7 +27,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $this->authorize('tasks.manage', Task::class);
+        $this->authorize('tasks.manage_self', Task::class);
         return view(
             'tasks.form',
         );
@@ -58,9 +58,9 @@ class TaskController extends Controller
         // Jeżeli jest przypisany do tego zadania, to ma do niego dostęp.
         if (!Auth::user()->isAdmin()) {
             if (
-                ($task->project == null && $task->user == null)
-                ||
-                (Auth::user()->id != $task->user->id && $task->project->user->id != Auth::user()->id)
+                ($task->user == null || Auth::user()->id != $task->user->id)
+                &&
+                ($task->project == null || $task->project->user == null || $task->project->user->id != Auth::user()->id)
             )
             {
                 abort(403);
@@ -85,9 +85,9 @@ class TaskController extends Controller
         // Takie same permisje jak w endpoincie show()
         if (!Auth::user()->isAdmin()) {
             if (
-                ($task->project == null && $task->user == null)
-                ||
-                (Auth::user()->id != $task->user->id && $task->project->user->id != Auth::user()->id)
+                ($task->user == null || Auth::user()->id != $task->user->id)
+                &&
+                ($task->project == null || $task->project->user == null || $task->project->user->id != Auth::user()->id)
             )
             {
                 abort(403);

@@ -36,8 +36,11 @@
         </div>
         <hr class="my-2">
         <div class="flex justify-end pt-2">
-            <x-button href="{{ route('projects.index') }}" secondary class="mr-2"
-                      label="{{ __('translation.back') }}"></x-button>
+            @if($editMode)
+                <x-button href="{{ route('projects.show', [$project]) }}" secondary class="mr-2" label="{{ __('translation.back') }}"></x-button>
+            @else
+                <x-button href="{{ route('projects.index') }}" secondary class="mr-2" label="{{ __('translation.back') }}"></x-button>
+            @endif
             <x-button type="submit" primary label="{{ __('translation.save') }}" spinner></x-button>
         </div>
     </form>

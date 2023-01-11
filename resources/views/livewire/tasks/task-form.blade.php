@@ -68,31 +68,26 @@
                 />
             </div>
         </div>
-        <hr class="my-2">
-        <div class="grid grid-cols-2 gap-2">
-            <div class="">
-                <label for="completed">
-                    {{ __('tasks.attributes.completed') }}
-                </label>
+        @if ($editMode)
+            <hr class="my-2">
+            <div class="grid grid-cols-2 gap-2">
+                <div class="">
+                    <label for="completed">
+                        {{ __('tasks.attributes.completed') }}
+                    </label>
+                </div>
+                <div class="">
+                    <x-toggle lg wire:model="task.completed"/>
+                </div>
             </div>
-            <div class=""> <!-- TODO Poprawić pole Ukończone w formularzu  -->
-                <x-select
-                    wire:model="task.completed"
-                    placeholder="{{ __('tasks.placeholders.status') }}"
-                    :options="[
-                        ['name' => 'Nie',  'id' => 0],
-                        ['name' => 'Tak',  'id' => 1],
-                    ]"
-                    option-label="name"
-                    option-value="id"
-
-                />
-            </div>
-        </div>
+        @endif
         <hr class="my-2">
         <div class="flex justify-end pt-2">
-            <x-button href="{{ route('tasks.index') }}" secondary class="mr-2"
-                      label="{{ __('translation.back') }}"></x-button>
+            @if($editMode)
+                <x-button href="{{ route('tasks.show', [$task]) }}" secondary class="mr-2" label="{{ __('translation.back') }}"></x-button>
+            @else
+                <x-button href="{{ route('tasks.index') }}" secondary class="mr-2" label="{{ __('translation.back') }}"></x-button>
+            @endif
             <x-button type="submit" primary label="{{ __('translation.save') }}" spinner></x-button>
         </div>
     </form>
