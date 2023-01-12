@@ -27,8 +27,10 @@ return [
     'back' => 'Cofnij',
     'save' => 'Zapisz',
     'create' => 'Dodaj',
+    'cancel' => 'Anuluj',
     'user' => 'Użytkownik',
     'project' => 'Projekt',
     'task' => 'Zadanie',
+    'notes' => 'Notatki'
 
 ];

@@ -42,6 +42,9 @@ class TaskForm extends Component
                     'date_format: Y-m-d H:i:s'
                 ],
             ],
+            'task.completed' => [
+
+            ]
         ];
     }
 
@@ -52,6 +55,7 @@ class TaskForm extends Component
             'user_id' => Str::lower(__('tasks.attributes.user')),
             'project_id' => Str::lower(__('tasks.attributes.project')),
             'deadline' => Str::lower(__('tasks.attributes.deadline')),
+            'completed' => Str::lower(__('tasks.attributes.completed')),
         ];
     }
 
