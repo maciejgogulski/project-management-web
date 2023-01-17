@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class ProjectNoteFactory extends Factory
+class NoteFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,8 +16,11 @@ class ProjectNoteFactory extends Factory
      */
     public function definition()
     {
+        $projectOrTaskNote = $this->faker->boolean;
+
         return [
-            'project_id' => $this->faker->numberBetween(1, 30),
+            'project_id' => $projectOrTaskNote ? $this->faker->numberBetween(1, 30) : null,
+            'task_id' => $projectOrTaskNote ? null : $this->faker->numberBetween(1, 300),
             'content' => $this->faker->sentences(3, true),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',

@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('task_notes', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('task_id')->constrained();
+            $table->foreignId('project_id')->nullable()->constrained();
+            $table->foreignId('task_id')->nullable()->constrained();
             $table->string('content');
             $table->timestamps();
             $table->softDeletes();
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_notes');
+        Schema::dropIfExists('notes');
     }
 };

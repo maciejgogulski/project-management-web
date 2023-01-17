@@ -24,6 +24,6 @@ class Task extends Model
     }
 
     public function notes() {
-        return $this->hasMany(ProjectNote::class);
+        return $this->hasMany(Note::class);
     }
 }

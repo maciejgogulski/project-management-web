@@ -14,7 +14,7 @@
                 <div class="{{ $editMode || $createMode ? 'p-5 bg-green-100 rounded-b-md' : '' }}">
 
                     <div class="">
-                        <x-textarea wire:model="projectNote.content"
+                        <x-textarea wire:model="note.content"
                                     placeholder="{{ __('notes.placeholders.enter_content') }}"/>
                     </div>
 
@@ -22,14 +22,14 @@
             </form>
         @else
             <h3 class="inline-block text-sm text-primary-600">{{ __('translation.attributes.updated_at') }}
-                : {{$projectNote->updated_at}}</h3>
+                : {{$note->updated_at}}</h3>
             <x-button primary wire:click="toggleEditMode" class="inline-block mx-2 px-1 py-1">
                 {{__('translation.edit')}}
             </x-button>
 
             <hr class="my-2">
 
-            {{ $projectNote->content }}
+            {{ $note->content }}
         @endif
 
     </div>

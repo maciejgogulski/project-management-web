@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Notes;
 
-use App\Models\ProjectNote;
+use App\Models\Note;
 use App\Models\TaskNote;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +16,7 @@ class NoteForm extends Component
     use AuthorizesRequests;
 
     public TaskNote $taskNote;
-    public ProjectNote $projectNote;
+    public Note $projectNote;
     public bool $editMode;
 
     public function rules()
@@ -33,7 +33,7 @@ class NoteForm extends Component
         ];
     }
 
-    public function mount(ProjectNote $projectNote, TaskNote $taskNote, bool $editMode)
+    public function mount(Note $projectNote, TaskNote $taskNote, bool $editMode)
     {
         $this->taskNote = $taskNote;
         $this->projectNote = $projectNote;

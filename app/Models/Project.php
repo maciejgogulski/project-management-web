@@ -26,6 +26,6 @@ class Project extends Model
     }
 
     public function notes() {
-        return $this->hasMany(ProjectNote::class)->orderBy('updated_at', 'desc');
+        return $this->hasMany(Note::class)->orderBy('updated_at', 'desc');
     }
 }

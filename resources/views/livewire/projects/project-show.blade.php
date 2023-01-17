@@ -71,7 +71,7 @@
     <div class="md:space-x-1 space-y-1 md:space-y-0 mb-4">
         <a class="inline-block px-6 py-2.5 bg-primary-600 text-white text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg transition duration-150 ease-in-out"
            data-bs-toggle="collapse" href="#collapseNotes" role="button" aria-expanded="false"
-           aria-controls="collapseExample">
+           aria-controls="collapseNotes">
             {{ __('translation.notes') }}
         </a>
 
@@ -90,11 +90,6 @@
         </div>
     </div>
 
-    <div class="collapse" id="collapseNotes">
-        @foreach($project->notes as $note)
-            <div class="block p-6 rounded-lg shadow-lg bg-white mb-5">
-                <livewire:notes.note-show :projectNote="$note"/>
-            </div>
-        @endforeach
-    </div>
+    <livewire:notes.note-list :project="$project"/>
+
 </div>

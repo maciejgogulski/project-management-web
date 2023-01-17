@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Notes;
 
 use App\Models\Project;
-use App\Models\ProjectNote;
-use App\Models\TaskNote;
+use App\Models\Note;
+use App\Models\Task;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -17,16 +17,16 @@ class NoteShow extends Component
     use Actions;
     use AuthorizesRequests;
 
-    public ProjectNote $projectNote;
+    public Note $note;
     public Project $project;
-    public TaskNote $taskNote;
+    public Task $task;
     public bool $editMode;
     public bool $createMode;
 
     public function rules()
     {
         return [
-            'projectNote.content' => [
+            'note.content' => [
                 'required',
                 'string',
                 'min:2'
@@ -34,10 +34,11 @@ class NoteShow extends Component
         ];
     }
 
-    public function mount(ProjectNote $projectNote, Project $project, $editMode = false, $createMode = false)
+    public function mount(Note $note, Project $project = null, Task $task = null, $editMode = false, $createMode = false)
     {
         $this->project = $project;
-        $this->projectNote = $projectNote;
+        $this->task = $task;
+        $this->note = $note;
         $this->createMode = $createMode;
         $this->editMode = $editMode;
     }
@@ -68,19 +69,21 @@ class NoteShow extends Component
         sleep(1);
         $this->validate();
 
-        $projectNote = $this->projectNote;
+        $note = $this->note;
 
         if($this->createMode) {
-            $projectNote->project_id = $this->project->id;
+            if(isset($this->project)) {
+                $note->project_id = $this->project->id;
+            }
+
+            if(isset($this->task)) {
+                $note->task_id = $this->task->id;
+            }
         }
 
-        DB::transaction(function () use ($projectNote) {
-            $projectNote->save();
+        DB::transaction(function () use ($note) {
+            $note->save();
         });
-
-        if($this->createMode) {
-            $this->redirect(route('projects.show', [$this->project]));
-        }
 
         $this->notification()->success(
             $this->editMode
@@ -91,7 +94,10 @@ class NoteShow extends Component
                 : __('notes.messages.successes.stored')
         );
 
-        $this->createMode = false;
+        if($this->createMode) {
+            $this->emit('refreshComponent');
+        }
+
         $this->editMode = false;
     }
 }
