@@ -2,15 +2,14 @@
 
 namespace App\Http\Livewire\Projects;
 
-use App\Http\Livewire\Projects\Actions\AddUserToProjectAction;
-use App\Http\Livewire\Projects\Actions\EditProjectAction;
-use App\Http\Livewire\Projects\Actions\SoftDeleteProjectAction;
+use App\Http\Livewire\Actions\EditAction;
+use App\Http\Livewire\Actions\ShowAction;
+use App\Http\Livewire\Actions\SoftDeleteAction;
 use App\Http\Livewire\Projects\Filters\HasTasksFilter;
 use App\Http\Livewire\Projects\Filters\ManagerAssignedFilter;
-use App\Http\Livewire\Users\Actions\AssignAdminRoleAction;
-use App\Http\Livewire\Users\Actions\RemoveAdminRoleAction;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 
@@ -22,11 +21,6 @@ class ProjectsTableView extends TableView
      */
     protected $model = Project::class;
 
-    /**
-     * Sets the headers of the table as you want to be displayed
-     *
-     * @return array<string> Array of headers
-     */
     public $searchBy = [
         'name',
         'created_at',
@@ -34,9 +28,34 @@ class ProjectsTableView extends TableView
         'deleted_at'
     ];
 
+    public $buttons;
+
+    public function __construct($id = null)
+    {
+        parent::__construct($id);
+        $this->buttons = $this->buttons();
+    }
+
+
+    public function buttons():array {
+        if (Auth::user()->can('projects.manage')) {
+            return [
+                'create' => [
+                    'route' => 'projects.create',
+                    'label' => __('projects.labels.create'),
+                ],
+            ];
+        }
+        return [];
+    }
+
     public function repository():Builder
     {
-        return Project::query()->withTrashed();
+        if (Auth::user()->isAdmin()) {
+            return Project::query()->withTrashed();
+        }
+        return Project::query()
+            ->where('user_id', '=', Auth::user()->id);
     }
     /**
      * Sets the headers of the table as you want to be displayed
@@ -45,13 +64,21 @@ class ProjectsTableView extends TableView
      */
     public function headers(): array
     {
+        if (Auth::user()->isAdmin()) {
+            return [
+                Header::title(__('projects.attributes.name'))->sortBy('name'),
+                Header::title(__('projects.attributes.manager'))->sortBy('user'),
+                Header::title(__('projects.attributes.number_of_tasks')),
+                Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
+                Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
+                Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
+            ];
+        }
+
         return [
             Header::title(__('projects.attributes.name'))->sortBy('name'),
             Header::title(__('projects.attributes.manager'))->sortBy('user'),
-            Header::title(__('translation.navigation.tasks')),
-            Header::title(__('translation.attributes.created_at'))->sortBy('created_at'),
-            Header::title(__('translation.attributes.updated_at'))->sortBy('updated_at'),
-            Header::title(__('translation.attributes.deleted_at'))->sortBy('deleted_at'),
+            Header::title(__('projects.attributes.number_of_tasks')),
         ];
     }
 
@@ -62,22 +89,30 @@ class ProjectsTableView extends TableView
      */
     public function row($model): array
     {
+        if (Auth::user()->isAdmin()) {
+            return [
+                $model->name,
+                $model->user->name ?? '',
+                $model->tasks->count(),
+                $model->created_at,
+                $model->updated_at,
+                $model->deleted_at,
+            ];
+        }
+
         return [
             $model->name,
             $model->user->name ?? '',
-            $model->tasks->implode('name', ', '),
-            $model->created_at,
-            $model->updated_at,
-            $model->deleted_at,
+            $model->tasks->count()
         ];
     }
 
     protected function actionsByRow(): array
     {
         return [
-            new EditProjectAction('projects.edit', __('translation.edit')),
-            new AddUserToProjectAction,
-            new SoftDeleteProjectAction,
+            new ShowAction('projects.show', __('translation.show')),
+            new EditAction('projects.edit', __('translation.edit')),
+            new SoftDeleteAction,
         ];
     }
 

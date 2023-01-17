@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Projects\Actions;
+namespace App\Http\Livewire\Actions;
 
 use LaravelViews\Actions\RedirectAction;
 use LaravelViews\Views\View;
 
-class EditProjectAction extends RedirectAction
+class ShowAction extends RedirectAction
 {
-    public function __construct(string $to, string $title, string $icon = 'edit')
+    public function __construct(string $to, string $title, string $icon = 'eye')
     {
         parent::__construct($to, $title, $icon);
     }

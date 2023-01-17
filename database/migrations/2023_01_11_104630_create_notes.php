@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
             $table->foreignId('project_id')->nullable()->constrained();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->boolean('completed')->default(false);
-            $table->dateTime('deadline');
-            $table->integer('time_spent')->default(0); // in minutes
+            $table->foreignId('task_id')->nullable()->constrained();
+            $table->string('content');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('notes');
     }
 };

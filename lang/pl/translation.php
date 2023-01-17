@@ -6,19 +6,31 @@ return [
         'deleted_at' => 'Usunięto',
     ],
     'navigation' => [
-        'dashboard' => 'Dashboard',
+        'dashboard' => 'Strona główna',
         'log-viewer' => 'Logi',
         'users' => 'Użytkownicy',
         'tasks' => 'Zadania',
         'projects' => 'Projekty',
     ],
+    'messages' => [
+        'successes' => [
+            'updated_title' => 'Zaktualizowano',
+            'stored_title' => 'Utworzono',
+            'deleted' => 'Usunięto'
+        ]
+    ],
     'yes' => 'Tak',
     'no' => 'Nie',
+    'show' => 'Wyświetl',
     'edit' => 'Edytuj',
     'delete' => 'Usuń',
     'back' => 'Cofnij',
     'save' => 'Zapisz',
+    'create' => 'Dodaj',
+    'cancel' => 'Anuluj',
     'user' => 'Użytkownik',
-    'project' => 'Projekt'
+    'project' => 'Projekt',
+    'task' => 'Zadanie',
+    'notes' => 'Notatki'
 
 ];

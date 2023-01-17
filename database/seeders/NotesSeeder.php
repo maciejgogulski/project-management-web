@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Project;
+use App\Models\Note;
+use App\Models\TaskNote;
+use Database\Factories\NoteFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProjectSeeder extends Seeder
+class NotesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +17,6 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        Project::factory()->count(30)->create();
+        Note::factory()->count(1000)->create();
     }
 }

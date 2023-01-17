@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -14,12 +17,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Project::class);
+        $this->authorize('projects.manage_self', Project::class);
         return view(
             'projects.index',
-            [
-                'projects' => Project::withTrashed()->get()
-            ]
         );
     }
 
@@ -30,7 +30,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $this->authorize('viewAny', Project::class);
+        $this->authorize('projects.manage', Project::class);
         return view(
             'projects.form',
         );
@@ -53,9 +53,19 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        $this->authorize('viewAny', Project::class);
+        if (!Auth::user()->isAdmin()) {
+            if ($project->user == null || Auth::user()->id != $project->user->id) {
+                abort(403);
+            }
+        }
+        return view(
+            'projects.show',
+            [
+                'project' => $project
+            ],
+        );
     }
 
     /**
@@ -66,7 +76,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $this->authorize('viewAny', Project::class);
+        if (!Auth::user()->isAdmin()) {
+            if ($project->user == null || Auth::user()->id != $project->user->id) {
+                abort(403);
+            }
+        }
         return view(
             'projects.form',
             [
@@ -93,8 +107,43 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        $this->authorize('viewAny', Project::class);
+    }
+
+    public function async(Request $request)
+    {
+        // TODO Pobranie projektów należących do zwykłego usera, potrzebne do formularza dadawania i edycji zadania.
+        if (Auth::user()->can('projects.manage')) {
+            return Project::query()
+                ->select('id', 'name')
+                ->orderBy('name')
+                ->when(
+                    $request->search,
+                    fn(Builder $query) => $query->where('name', 'like', "%{$request->search}%")
+                )->when(
+                    $request->exists('selected'),
+                    fn(Builder $query) => $query->whereIn(
+                        'id',
+                        $request->input('selected', [])
+                    ),
+                    fn(Builder $query) => $query->limit(5)
+                )->get();
+        }
+        return Project::query()
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->where('user_id', '=' , Auth::user()->id)
+            ->when(
+                $request->search,
+                fn(Builder $query) => $query->where('name', 'like', "%{$request->search}%")
+            )->when(
+                $request->exists('selected'),
+                fn(Builder $query) => $query->whereIn(
+                    'id',
+                    $request->input('selected', [])
+                ),
+                fn(Builder $query) => $query->limit(5)
+            )->get();
     }
 }

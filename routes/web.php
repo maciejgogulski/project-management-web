@@ -36,8 +36,17 @@ Route::middleware([
             ->middleware(['permission:users.index']);
     });
 
-    Route::resource('tasks', TaskController::class);
+    Route::resource('tasks', TaskController::class)->only(
+        ['index', 'create', 'edit', 'show']
+    );
+
     Route::resource('projects', ProjectController::class)->only([
-        'index', 'create', 'edit'
-    ]);
+        'index', 'create', 'edit', 'show']
+    );
+
+    Route::get('async/users', [UserController::class, 'async'])
+    ->name('async.users');
+
+    Route::get('async/projects', [ProjectController::class, 'async'])
+        ->name('async.projects');
 });

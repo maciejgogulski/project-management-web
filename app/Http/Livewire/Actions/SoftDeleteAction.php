@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Projects\Actions;
+namespace App\Http\Livewire\Actions;
 
-use App\Http\Projects\Actions\Current;
-use App\Http\Projects\Actions\Model;
+use App\Actions\Current;
+use Illuminate\Database\Eloquent\Model;
 use LaravelViews\Actions\Action;
 use LaravelViews\Views\View;
 
-class AddUserToProjectAction extends Action
+class SoftDeleteAction extends Action
 {
     /**
      * Any title you want to be displayed
@@ -19,23 +19,23 @@ class AddUserToProjectAction extends Action
      * This should be a valid Feather icon string
      * @var String
      */
-    public $icon = "user-plus";
+    public $icon = "trash";
 
     public function __construct()
     {
         parent::__construct();
-        $this->title = __('projects.actions.add_user');
+        $this->title = __('translation.delete');
     }
-
     /**
      * Execute the action when the user clicked on the button
      *
      * @param $model Model object of the list where the user has clicked
      * @param $view Current view where the action was executed from
      */
-    public function handle($model, View $view)
+    public function handle(Model $model, View $view)
     {
-        throw new \Exception("Not implemented yet");
+        $model->delete();
+        $this->success(__('translation.messages.successes.deleted') . ' ' .$model->name);
     }
 
     public function renderIf($model, View $view)

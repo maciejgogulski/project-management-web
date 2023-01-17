@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -14,15 +15,11 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Task::class);
+        $this->authorize('tasks.manage_self', Task::class);
         return view(
             'tasks.index',
-            [
-                'tasks' => Task::withTrashed()->get()
-            ]
         );
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -30,7 +27,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $this->authorize('viewAny', Task::class);
+        $this->authorize('tasks.manage_self', Task::class);
+        return view(
+            'tasks.form',
+        );
     }
 
     /**
@@ -50,9 +50,28 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        $this->authorize('viewAny', Task::class);
+        // Dostęp do konkretnego zadania:
+        // Jeżeli user jest adminem, to ma dostęp do kaźdego zadania.
+        // Jeżeli jest właścicielem projektu nadrzędnego, to ma dostęp do każdego zadania w tym projekcie.
+        // Jeżeli jest przypisany do tego zadania, to ma do niego dostęp.
+        if (!Auth::user()->isAdmin()) {
+            if (
+                ($task->user == null || Auth::user()->id != $task->user->id)
+                &&
+                ($task->project == null || $task->project->user == null || $task->project->user->id != Auth::user()->id)
+            )
+            {
+                abort(403);
+            }
+        }
+        return view(
+            'tasks.show',
+            [
+                'task' => $task
+            ],
+        );
     }
 
     /**
@@ -61,9 +80,25 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
-        $this->authorize('viewAny', Task::class);
+        // Takie same permisje jak w endpoincie show()
+        if (!Auth::user()->isAdmin()) {
+            if (
+                ($task->user == null || Auth::user()->id != $task->user->id)
+                &&
+                ($task->project == null || $task->project->user == null || $task->project->user->id != Auth::user()->id)
+            )
+            {
+                abort(403);
+            }
+        }
+        return view(
+            'tasks.form',
+            [
+                'task' => $task
+            ],
+        );
     }
 
     /**

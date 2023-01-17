@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Projects;
 
 use App\Models\Project;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use WireUi\Traits\Actions;
@@ -10,6 +12,7 @@ use WireUi\Traits\Actions;
 class ProjectForm extends Component
 {
     use Actions;
+    use AuthorizesRequests;
 
     public Project $project;
     public bool $editMode;
@@ -21,6 +24,11 @@ class ProjectForm extends Component
                 'required',
                 'string',
                 'min:2'
+            ],
+            'project.user_id' => [
+                'required',
+                'integer',
+                'exists:users,id'
             ]
         ];
     }
@@ -28,7 +36,8 @@ class ProjectForm extends Component
     public function validationAttributes()
     {
         return [
-            'name' => Str::lower(__('projects.attributes.name'))
+            'name' => Str::lower(__('projects.attributes.name')),
+            'user_id' => Str::lower(__('projects.attributes.manager')),
         ];
     }
 
@@ -52,7 +61,15 @@ class ProjectForm extends Component
     {
         sleep(1);
         $this->validate();
-        $this->project->save();
+
+        $project = $this->project;
+
+        DB::transaction(function () use ($project) {
+            $project->save();
+        });
+
+        $this->redirect(route('projects.show', [$project]));
+
         $this->notification()->success(
             $this->editMode
                 ? __('translation.messages.successes.updated_title')
@@ -61,6 +78,5 @@ class ProjectForm extends Component
                 ? __('projects.messages.successes.updated', ['name' => $this->project->name])
                 : __('projects.messages.successes.stored', ['name' => $this->project->name])
         );
-        $this->editMode = true;
     }
 }

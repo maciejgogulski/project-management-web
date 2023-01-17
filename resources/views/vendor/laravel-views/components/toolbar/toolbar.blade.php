@@ -27,6 +27,14 @@ UI components used:
         @include('laravel-views::components.toolbar.sorting')
       </div>
     @endif
+      {{-- Buttons --}}
+      @if(isset($buttons))
+          @foreach($buttons as $button)
+              <div>
+                  <x-button href="{{ route($button['route']) }}" secondary class="mr-2" label="{{ $button['label'] }}"></x-button>
+              </div>
+          @endforeach
+      @endif
 
     {{-- Filters --}}
     <div>
