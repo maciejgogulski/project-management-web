@@ -17,6 +17,7 @@
         <!-- Scripts -->
         @wireUiScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://unpkg.com/feather-icons"></script>
     </head>
     <body class="font-sans antialiased">
 
@@ -47,5 +48,8 @@
 
         @livewireScripts
         @laravelViewsScripts('laravel-views')
+        <script>
+            feather.replace()
+        </script>
     </body>
 </html>

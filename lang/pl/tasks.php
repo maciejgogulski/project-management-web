@@ -13,7 +13,10 @@ return [
         'user' => 'Użytkownik',
         'project' => 'Projekt'
     ],
-    'actions' => [],
+    'actions' => [
+        'mark_as_finished' => 'Oznacz jako ukończone',
+        'mark_as_unfinished' => 'Oznacz jako nieukończone'
+    ],
     'messages' => [
         'successes' => [
             'updated' => 'Zaktualizowano zadanie :name',

@@ -28,13 +28,26 @@
         </div>
         <div class="pr-5 mr-5 border-r-2">
             <div class="grid grid-cols-1 gap-2">
-                <p class="font-semibold"> {{ __('tasks.attributes.completed') }} </p>
+                <p class="font-semibold"> {{ __('tasks.attributes.not_completed') }} </p>
                 <hr class="my-1">
                 @if($project->tasks->count() > 0)
                     @foreach($project->tasks as $task)
-                        @if($task->completed)
-                            <a href="{{ route('tasks.show', [$task]) }}"
-                               class="rounded bg-green-100 hover:bg-green-200"> {{ $task->name }} </a>
+                        @if(!$task->completed)
+                            <div class="relative z-30" x-data="{ tooltip: false }">
+                                <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
+                                    <div class="absolute top-0 z-10 p-2 -mt-1 -translate-y-full
+                                    rounded bg-black text-sm leading-tight text-white transform">
+                                        {{ __('tasks.actions.mark_as_finished') }}
+                                    </div>
+                                </div>
+                                <span class="w-2/12 rounded mr-2 hover:bg-green-200"
+                                      wire:click="markFinished({{$task->id}})"
+                                      x-on:mouseover="tooltip=true" x-on:mouseout="tooltip=false">
+                                        <i class="inline-block" data-feather="check"></i>
+                                </span>
+                                <a href="{{ route('tasks.show', [$task]) }}"
+                                   class="rounded bg-red-100 hover:bg-red-200 inline-block w-10/12"> {{ $task->name }} </a>
+                            </div>
                         @endif
                     @endforeach
                 @else
@@ -44,13 +57,26 @@
         </div>
         <div class="">
             <div class="grid grid-cols-1 gap-2">
-                <p class="font-semibold"> {{ __('tasks.attributes.not_completed') }} </p>
+                <p class="font-semibold"> {{ __('tasks.attributes.completed') }} </p>
                 <hr class="my-1">
                 @if($project->tasks->count() > 0)
                     @foreach($project->tasks as $task)
-                        @if(!$task->completed)
-                            <a href="{{ route('tasks.show', [$task]) }}"
-                               class="rounded hover:bg-gray-200"> {{ $task->name }} </a>
+                        @if($task->completed)
+                            <div class="relative z-30" x-data="{ tooltip: false }">
+                                <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
+                                    <div class="absolute top-0 z-10 p-2 -mt-1 -translate-y-full
+                                    rounded bg-black text-sm leading-tight text-white transform">
+                                        {{ __('tasks.actions.mark_as_unfinished') }}
+                                    </div>
+                                </div>
+                                <span class="w-2/12 rounded mr-2 hover:bg-red-200"
+                                      wire:click="markUnfinished({{$task->id}})"
+                                      x-on:mouseover="tooltip=true" x-on:mouseout="tooltip=false">
+                                        <i class="inline-block" data-feather="x"></i>
+                                </span>
+                                <a href="{{ route('tasks.show', [$task]) }}"
+                                   class="rounded bg-green-100 hover:bg-green-200 inline-block w-10/12"> {{ $task->name }} </a>
+                            </div>
                         @endif
                     @endforeach
                 @else
