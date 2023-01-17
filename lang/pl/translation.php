@@ -6,7 +6,7 @@ return [
         'deleted_at' => 'Usunięto',
     ],
     'navigation' => [
-        'dashboard' => 'Dashboard',
+        'dashboard' => 'Strona główna',
         'log-viewer' => 'Logi',
         'users' => 'Użytkownicy',
         'tasks' => 'Zadania',

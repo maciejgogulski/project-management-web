@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('translation.navigation.dashboard') }}
                     </x-jet-nav-link>
                     @can('tasks.manage_self')
                         <x-jet-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('tasks.index')">

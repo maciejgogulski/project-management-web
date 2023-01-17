@@ -43,7 +43,7 @@ class TaskForm extends Component
                 ],
             ],
             'task.completed' => [
-
+                ''
             ]
         ];
     }
@@ -81,6 +81,10 @@ class TaskForm extends Component
         $this->validate();
 
         $task = $this->task;
+
+        if (!$this->editMode) {
+            $task->completed = false;
+        }
 
         DB::transaction(function () use ($task) {
             $task->save();

@@ -11,7 +11,10 @@ return [
         'completed' => 'Ukończone',
         'not_completed' => 'Nieukończone',
         'user' => 'Użytkownik',
-        'project' => 'Projekt'
+        'project' => 'Projekt',
+        'after_term' => 'Zadania po terminie',
+        'before_term' => 'Zadania przed terminem',
+        'no_tasks' => 'Brak zadań',
     ],
     'actions' => [
         'mark_as_finished' => 'Oznacz jako ukończone',
