@@ -95,12 +95,6 @@
 
     <hr class="my-1">
 
-    <div class="collapse" id="collapseCreateNoteForm">
-        <div class="block p-6 rounded-lg shadow-lg bg-white mb-5">
-            <livewire:notes.note-show :createMode="true" :task="$task"/>
-        </div>
-    </div>
-
     <livewire:notes.note-list :task="$task"/>
 
 </div>
