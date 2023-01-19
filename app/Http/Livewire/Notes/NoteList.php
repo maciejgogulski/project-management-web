@@ -12,7 +12,7 @@ class NoteList extends Component
     public Task $task;
 
     protected $listeners = [
-        'refreshComponent' => '$refresh',
+        'refreshNoteList' => '$refresh',
     ];
 
     public function mount(Project $project, Task $task)

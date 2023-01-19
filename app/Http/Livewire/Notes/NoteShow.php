@@ -23,6 +23,10 @@ class NoteShow extends Component
     public bool $editMode;
     public bool $createMode;
 
+    protected $listeners = [
+        'refreshNote' => '$refresh'
+    ];
+
     public function rules()
     {
         return [
@@ -95,7 +99,9 @@ class NoteShow extends Component
         );
 
         if($this->createMode) {
-            $this->emit('refreshComponent');
+            //unset($this->note);
+            $this->emit('refreshNote');
+            $this->emitUp('refreshNoteList');
         }
 
         $this->editMode = false;
