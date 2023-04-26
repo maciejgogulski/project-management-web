@@ -51,7 +51,3 @@ Route::middleware([
     Route::get('async/projects', [ProjectController::class, 'async'])
         ->name('async.projects');
 });
-
-Route::name('api.')->prefix('api')->group(function () {
-    Route::resource('projects', ProjectApiController::class);
-});
