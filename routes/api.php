@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Rest\ProjectApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,5 +24,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'projects'], function () {
         Route::get('/', [ProjectApiController::class, 'index']);
         Route::get('/with-tasks', [ProjectApiController::class, 'projectWithTasks']);
+    });
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', [UserController::class, 'async']);
     });
 });
