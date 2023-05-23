@@ -18,4 +18,14 @@ class TaskApiController extends Controller
         $task->save();
         return response()->json($task);
     }
+
+    public function update(Request $request, Task $task) {
+        $task->name = $request->input('name');
+        $task->deadline = $request->input('deadline');
+        $task->project_id = $request->input('projectId');
+        $task->user_id = $request->input('userId');
+        $task->completed = $request->input('completed');
+        $task->save();
+        return response()->json($task);
+    }
 }
