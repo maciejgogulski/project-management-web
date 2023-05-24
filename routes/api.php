@@ -36,5 +36,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [TaskApiController::class, 'store']);
         Route::get('/{task}', [TaskApiController::class, 'show']);
         Route::put('/{task}', [TaskApiController::class, 'update']);
+        Route::delete('/{task}', [TaskApiController::class, 'delete']);
     });
 });
