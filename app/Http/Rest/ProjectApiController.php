@@ -23,4 +23,18 @@ class ProjectApiController extends Controller
             ->orderBy('name')
             ->get();
     }
+
+    public function show(Project $project) {
+        if (!Auth::user()->isAdmin()) {
+            if ($project->user == null || Auth::user()->id != $project->user->id) {
+                abort(403);
+            }
+        }
+
+        return Project::with('user', 'tasks')
+            ->where('id', '=', $project->id)
+            ->where('user_id', '=' , Auth::user()->id)
+            ->get()
+            ->first();
+    }
 }

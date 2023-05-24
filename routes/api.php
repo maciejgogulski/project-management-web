@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use App\Http\Rest\ProjectApiController;
 use App\Http\Rest\TaskApiController;
 use App\Http\Rest\UserApiController;
@@ -26,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'projects'], function () {
         Route::get('/', [ProjectApiController::class, 'index']);
         Route::get('/with-tasks', [ProjectApiController::class, 'projectWithTasks']);
+        Route::get('/{project}', [ProjectApiController::class, 'show']);
     });
 
     Route::group(['prefix' => 'users'], function () {
@@ -34,6 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['prefix' => 'tasks'], function () {
         Route::post('/', [TaskApiController::class, 'store']);
+        Route::get('/{task}', [TaskApiController::class, 'show']);
         Route::put('/{task}', [TaskApiController::class, 'update']);
     });
 });
