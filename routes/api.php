@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['prefix' => 'projects'], function () {
         Route::get('/', [ProjectApiController::class, 'index']);
+        Route::post('/', [ProjectApiController::class, 'store']);
         Route::get('/with-tasks', [ProjectApiController::class, 'projectWithTasks']);
         Route::get('/{project}', [ProjectApiController::class, 'show']);
     });

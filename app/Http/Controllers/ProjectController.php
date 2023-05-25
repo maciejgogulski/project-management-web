@@ -30,7 +30,6 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $this->authorize('projects.manage', Project::class);
         return view(
             'projects.form',
         );
@@ -44,7 +43,6 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('viewAny', Project::class);
     }
 
     /**

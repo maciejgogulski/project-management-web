@@ -5,6 +5,7 @@ namespace App\Http\Rest;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Task;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectApiController extends Controller
@@ -15,6 +16,14 @@ class ProjectApiController extends Controller
             ->where('user_id', '=' , Auth::user()->id)
             ->orderBy('name')
             ->get();
+    }
+
+    public function store(Request $request) {
+        $project = new Project();
+        $project->name = $request->input('name');
+        $project->user_id = $request->input('user_id');
+        $project->save();
+        return response()->json($project);
     }
 
     public function projectWithTasks() {
