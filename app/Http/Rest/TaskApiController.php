@@ -5,6 +5,7 @@ namespace App\Http\Rest;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Task;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,5 +65,23 @@ class TaskApiController extends Controller
                 abort(403);
             }
         }
+    }
+
+    public function afterDeadlineTasks() {
+        return Task::query()
+            ->where('user_id', '=', Auth::id())
+            ->where('completed', '=', false)
+            ->whereDate('deadline', '<', Carbon::now()->toDateTimeString())
+            ->orderBy('deadline', 'desc')
+            ->get();
+    }
+
+    public function beforeDeadlineTasks() {
+        return Task::query()
+            ->where('user_id', '=', Auth::id())
+            ->where('completed', '=', false)
+            ->whereDate('deadline', '>=', Carbon::now()->toDateTimeString())
+            ->orderBy('deadline', 'desc')
+            ->get();
     }
 }

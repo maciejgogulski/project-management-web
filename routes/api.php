@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::group(['prefix' => 'tasks'], function () {
         Route::post('/', [TaskApiController::class, 'store']);
+        Route::get('/after-deadline', [TaskApiController::class, 'afterDeadlineTasks']);
+        Route::get('/before-deadline', [TaskApiController::class, 'beforeDeadlineTasks']);
         Route::get('/{task}', [TaskApiController::class, 'show']);
         Route::put('/{task}', [TaskApiController::class, 'update']);
         Route::delete('/{task}', [TaskApiController::class, 'delete']);
