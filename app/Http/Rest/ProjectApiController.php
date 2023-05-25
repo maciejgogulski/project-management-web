@@ -26,6 +26,13 @@ class ProjectApiController extends Controller
         return response()->json($project);
     }
 
+    public function edit(Project $project, Request $request) {
+        $project->name = $request->input('name');
+        $project->user_id = $request->input('user_id');
+        $project->save();
+        return response()->json($project);
+    }
+
     public function projectWithTasks() {
         return Project::with('tasks')
             ->where('user_id', '=' , Auth::user()->id)
