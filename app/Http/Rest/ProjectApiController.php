@@ -47,7 +47,7 @@ class ProjectApiController extends Controller
             }
         }
 
-        return Project::with('user', 'tasks')
+        return Project::with('user', 'tasks', 'notes')
             ->where('id', '=', $project->id)
             ->where('user_id', '=' , Auth::user()->id)
             ->get()
