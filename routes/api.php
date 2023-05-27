@@ -18,8 +18,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', function (Request $request) {
+        $request->user()->currentAccessToken()->delete();
+        return ['message' => 'Logged out'];
+    });
+
     Route::get('/user', function (Request $request) {
         return $request->user();
+    });
+
+    Route::get('/check-auth', function () {
+        return response()->json(auth()->check());
     });
 
     Route::group(['prefix' => 'projects'], function () {
@@ -42,4 +51,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{task}', [TaskApiController::class, 'update']);
         Route::delete('/{task}', [TaskApiController::class, 'delete']);
     });
+});
+
+Route::post('/login', function (Request $request) {
+    $credentials = $request->only('email', 'password');
+
+    if (auth()->attempt($credentials)) {
+        $user = $request->user();
+        $token = $user->createToken('authToken')->plainTextToken;
+        return ['token' => $token];
+    }
+
+    return response(['message' => 'Invalid credentials'], 401);
 });
