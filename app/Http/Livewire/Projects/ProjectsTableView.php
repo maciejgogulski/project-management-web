@@ -38,15 +38,15 @@ class ProjectsTableView extends TableView
 
 
     public function buttons():array {
-        if (Auth::user()->can('projects.manage')) {
+//        if (Auth::user()->can('projects.manage')) {
             return [
                 'create' => [
                     'route' => 'projects.create',
                     'label' => __('projects.labels.create'),
                 ],
             ];
-        }
-        return [];
+//        }
+//        return [];
     }
 
     public function repository():Builder

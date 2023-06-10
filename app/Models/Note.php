@@ -18,4 +18,8 @@ class Note extends Model
     public function project() {
         return $this->belongsTo(Project::class);
     }
+
+    public function task() {
+        return $this->belongsTo(Task::class);
+    }
 }

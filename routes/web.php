@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Rest\ProjectApiController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::name('users.')->prefix('users')->group( function () {
+    Route::name('users.')->prefix('users')->group(function () {
         Route::get('', [UserController::class, 'index'])
             ->name('index')
             ->middleware(['permission:users.index']);
@@ -41,11 +42,11 @@ Route::middleware([
     );
 
     Route::resource('projects', ProjectController::class)->only([
-        'index', 'create', 'edit', 'show']
+            'index', 'create', 'edit', 'show']
     );
 
     Route::get('async/users', [UserController::class, 'async'])
-    ->name('async.users');
+        ->name('async.users');
 
     Route::get('async/projects', [ProjectController::class, 'async'])
         ->name('async.projects');

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 
-class TasksOnDashboardTable extends Component
+class TasksTable extends Component
 {
     use Actions;
     use AuthorizesRequests;
