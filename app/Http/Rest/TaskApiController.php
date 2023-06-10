@@ -11,14 +11,28 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskApiController extends Controller
 {
-
-    public function show(Task $task) {
+    public function show(Task $task)
+    {
         $this->hasAccess($task);
 
-        return Task::with('user', 'project')
+        $taskData = Task::with('user:id,name', 'project:id,name', 'notes')
             ->where('id', '=', $task->id)
-            ->get()
             ->first();
+
+        if (!$taskData) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
+
+        $response = $taskData->toArray();
+        $response['user_id'] = $taskData->user ? $taskData->user->id : null;
+        $response['user_name'] = $taskData->user ? $taskData->user->name : null;
+        $response['project_id'] = $taskData->project ? $taskData->project->id : null;
+        $response['project_name'] = $taskData->project ? $taskData->project->name : null;
+
+        unset($response['user']);
+        unset($response['project']);
+
+        return $response;
     }
 
     public function store(Request $request) {

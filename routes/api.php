@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Rest\NoteApiController;
 use App\Http\Rest\ProjectApiController;
 use App\Http\Rest\TaskApiController;
 use App\Http\Rest\UserApiController;
@@ -50,6 +51,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{task}', [TaskApiController::class, 'show']);
         Route::put('/{task}', [TaskApiController::class, 'update']);
         Route::delete('/{task}', [TaskApiController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'notes'], function () {
+        Route::post('/', [NoteApiController::class, 'store']);
+        Route::get('/{note}', [NoteApiController::class, 'show']);
+        Route::put('/{note}', [NoteApiController::class, 'update']);
+        Route::delete('/{note}', [NoteApiController::class, 'delete']);
     });
 });
 
